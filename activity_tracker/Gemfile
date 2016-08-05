@@ -1,5 +1,15 @@
 source 'https://rubygems.org'
 
+ruby '2.2.2'
+
+# Use devise for authentication and security purposes
+gem 'devise'
+
+# Use pry-rails for debugging.  Freezes server where there is "binding-pry"
+gem 'pry-rails'
+
+# Use annotate to see table values in models
+gem 'annotate'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
