@@ -23,4 +23,11 @@
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<% if @route == 'patients'%>
+
+  <%= render "devise/shared/links" %>
+
+<% end %>
+<br>
+Developer Mode:  This is your route -> <%= @route%>
+

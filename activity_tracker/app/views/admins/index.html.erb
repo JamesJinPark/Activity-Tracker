@@ -1,0 +1,10 @@
+<div class="contents row">
+	<h2>Admin Dashboard</h2>
+	<p> Hello ! <%= @current_user.email %><br>
+		This is your name -> <%= @current_user.name %><br>
+	</p>
+
+	<%= link_to 'Edit', edit_admin_registration_path(@current_user)%>
+	<%= link_to 'Log out', destroy_admin_session_path, :method => :delete %>
+
+</div>

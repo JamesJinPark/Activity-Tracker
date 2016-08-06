@@ -1,0 +1,794 @@
+=> [32m#<ActionDispatch::Request:0x00000005522d58[0m
+ @env[32m=[0m
+  {[31m[1;31m"[0m[31mrack.version[1;31m"[0m[31m[0m=>[[1;34m1[0m, [1;34m3[0m],
+   [31m[1;31m"[0m[31mrack.errors[1;31m"[0m[31m[0m=>[32m#<IO:<STDERR>>[0m,
+   [31m[1;31m"[0m[31mrack.multithread[1;31m"[0m[31m[0m=>[1;36mtrue[0m,
+   [31m[1;31m"[0m[31mrack.multiprocess[1;31m"[0m[31m[0m=>[1;36mfalse[0m,
+   [31m[1;31m"[0m[31mrack.run_once[1;31m"[0m[31m[0m=>[1;36mfalse[0m,
+   [31m[1;31m"[0m[31mSCRIPT_NAME[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31m[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mQUERY_STRING[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31m[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mSERVER_PROTOCOL[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mHTTP/1.1[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mSERVER_SOFTWARE[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mpuma 3.6.0 Sleepy Sunday Serenity[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mGATEWAY_INTERFACE[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mCGI/1.2[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mREQUEST_METHOD[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mGET[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mREQUEST_PATH[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31m/admins/sign_in[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mREQUEST_URI[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31m/admins/sign_in[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mHTTP_VERSION[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mHTTP/1.1[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mHTTP_HOST[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mlocalhost:3000[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mHTTP_CONNECTION[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mkeep-alive[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mHTTP_ACCEPT[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mtext/html, application/xhtml+xml[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mHTTP_TURBOLINKS_REFERRER[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mhttp://localhost:3000/[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mHTTP_USER_AGENT[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mMozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mHTTP_REFERER[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mhttp://localhost:3000/[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mHTTP_ACCEPT_ENCODING[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mgzip, deflate, sdch[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mHTTP_ACCEPT_LANGUAGE[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31men-US,en;q=0.8[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mHTTP_COOKIE[1;31m"[0m[31m[0m=>
+    [31m[1;31m"[0m[31m_activity_tracker_session=cXlIK1ZyNG9EeEw3a0FDYXM1enMrdndMZ3M0N1JlOW1sanRjODJjYU9ML2JMU1VxUTZCemxlUmpTMjJhdW9JQlZZTjBGOHU0V3ZKL2Q4RGlxTjFzLzVnb016MllZVUt1MDNJRXBZSzJobS9jbWZVdzBSdTZ0QUErLzA5YllFMGoydXpsZ0VibkNnV2hjcjY0dkc0RFI3Sm5FeENZay9JdDhuR3FIOHRUQ2dGTkp3Wk9HN1NoUHZGTnptQjMxQzdGRFZUbC80SEQzMGVETG5aN0ZaK25vR043eHVGbXVwejMzUWNleGEwL0lZY0hVeTdIcmNCYVhRSXEwWnFvYnErNWRCRE9HMnl1Uk9vVGErZkVCMUR5V3ZNYy9VOXBOMjVlY3B3Rm9QS1lGdm15Ykc0Q0trTDRVb0lQeHpRWUNJUlhYZ01IY1JNd2pFa3ZCV3luSXVrMW5vOXdVVEdNWHREYTJMV3MzU1U0ZFNxMTNVNy9ZSmRHL29nN3gyRTdtUHBmLS1Bc3R5NncxVEdMNUxNTjBOcmJ5TDV3PT0%3D--e6f73bf4fd754d0a69b48743f40c2766b617dc70[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mSERVER_NAME[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mlocalhost[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mSERVER_PORT[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31m3000[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mPATH_INFO[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31m/admins/sign_in[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mREMOTE_ADDR[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31m::1[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mpuma.socket[1;31m"[0m[31m[0m=>[32m#<TCPSocket:fd 18>[0m,
+   [31m[1;31m"[0m[31mrack.hijack?[1;31m"[0m[31m[0m=>[1;36mtrue[0m,
+   [31m[1;31m"[0m[31mrack.hijack[1;31m"[0m[31m[0m=>[32m#<Puma::Client:0x2fbad7c @ready=true>[0m,
+   [31m[1;31m"[0m[31mrack.input[1;31m"[0m[31m[0m=>[32m#<Puma::NullIO:0x00000003b62468[0m[32m>[0m,
+   [31m[1;31m"[0m[31mrack.url_scheme[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mhttp[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mrack.after_reply[1;31m"[0m[31m[0m=>[],
+   [31m[1;31m"[0m[31mpuma.config[1;31m"[0m[31m[0m=>
+    [32m#<Puma::Configuration:0x00000005c61150[0m
+     @options[32m=[0m
+      [32m#<Puma::LeveledOptions:0x00000005c60f70[0m
+       @cur[32m=[0m{},
+       @defaults[32m=[0m
+        {[33m:min_threads[0m=>[1;34m0[0m,
+         [33m:max_threads[0m=>[1;34m16[0m,
+         [33m:log_requests[0m=>[1;36mfalse[0m,
+         [33m:debug[0m=>[1;36mfalse[0m,
+         [33m:binds[0m=>[[31m[1;31m"[0m[31mtcp://0.0.0.0:9292[1;31m"[0m[31m[0m],
+         [33m:workers[0m=>[1;34m0[0m,
+         [33m:daemon[0m=>[1;36mfalse[0m,
+         [33m:mode[0m=>[33m:http[0m,
+         [33m:worker_timeout[0m=>[1;34m60[0m,
+         [33m:worker_boot_timeout[0m=>[1;34m60[0m,
+         [33m:worker_shutdown_timeout[0m=>[1;34m30[0m,
+         [33m:remote_address[0m=>[33m:socket[0m,
+         [33m:tag[0m=>[31m[1;31m"[0m[31mactivity_tracker[1;31m"[0m[31m[0m,
+         [33m:environment[0m=>[31m[1;31m"[0m[31mdevelopment[1;31m"[0m[31m[0m,
+         [33m:rackup[0m=>[31m[1;31m"[0m[31mconfig.ru[1;31m"[0m[31m[0m,
+         [33m:logger[0m=>[32m#<IO:<STDOUT>>[0m,
+         [33m:persistent_timeout[0m=>[1;34m20[0m},
+       @set[32m=[0m
+        [{[33m:environment[0m=>[31m[1;31m"[0m[31mdevelopment[1;31m"[0m[31m[0m,
+          [33m:pid[0m=>[31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/tmp/pids/server.pid[1;31m"[0m[31m[0m,
+          [33m:Port[0m=>[1;34m3000[0m,
+          [33m:Host[0m=>[31m[1;31m"[0m[31mlocalhost[1;31m"[0m[31m[0m,
+          [33m:AccessLog[0m=>[],
+          [33m:config[0m=>[31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/config.ru[1;31m"[0m[31m[0m,
+          [33m:DoNotReverseLookup[0m=>[1;36mtrue[0m,
+          [33m:daemonize[0m=>[1;36mfalse[0m,
+          [33m:caching[0m=>[1;36mnil[0m,
+          [33m:restart_cmd[0m=>[31m[1;31m"[0m[31mbin/rails server [1;31m"[0m[31m[0m,
+          [33m:log_stdout[0m=>[1;36mtrue[0m,
+          [33m:server[0m=>[1;36mnil[0m},
+         {[33m:log_requests[0m=>[1;36mfalse[0m,
+          [33m:environment[0m=>[31m[1;31m"[0m[31mdevelopment[1;31m"[0m[31m[0m,
+          [33m:binds[0m=>[[31m[1;31m"[0m[31mtcp://localhost:3000[1;31m"[0m[31m[0m],
+          [33m:app[0m=>
+           [32m#<ActivityTracker::Application:0x000000054e4e90[0m
+            @_all_autoload_paths[32m=[0m
+             [[31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/assets[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/channels[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/controllers[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/controllers/concerns[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/helpers[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/jobs[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/mailers[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/models[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/models/concerns[1;31m"[0m[31m[0m],
+            @_all_load_paths[32m=[0m
+             [[31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/lib[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/vendor[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/assets[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/channels[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/controllers[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/controllers/concerns[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/helpers[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/jobs[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/mailers[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/models[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/models/concerns[1;31m"[0m[31m[0m],
+            @app[32m=[0m
+             [32m#<Rack::Sendfile:0x00000003a67798[0m
+              @app[32m=[0m
+               [32m#<ActionDispatch::Static:0x00000003a679a0[0m
+                @app[32m=[0m
+                 [32m#<ActionDispatch::Executor:0x00000003a679f0[0m
+                  @app[32m=[0m
+                   [32m#<ActiveSupport::Cache::Strategy::LocalCache::Middleware:0x00000004074a50[0m
+                    @app[32m=[0m
+                     [32m#<Rack::Runtime:0x00000003a67a18[0m
+                      @app[32m=[0m
+                       [32m#<Rack::MethodOverride:0x00000003a67a40[0m
+                        @app[32m=[0m
+                         [32m#<ActionDispatch::RequestId:0x00000003a67a68[0m
+                          @app[32m=[0m
+                           [32m#<Sprockets::Rails::QuietAssets:0x00000003a67ce8[0m
+                            @app[32m=[0m
+                             [32m#<Rails::Rack::Logger:0x00000003a67d38[0m
+                              @app[32m=[0m
+                               [32m#<ActionDispatch::ShowExceptions:0x00000003a67d60[0m
+                                @app[32m=[0m
+                                 [32m#<WebConsole::Middleware:0x00000003a67d88[0m
+                                  @app[32m=[0m
+                                   [32m#<ActionDispatch::DebugExceptions:0x00000003a67db0[0m
+                                    @app[32m=[0m
+                                     [32m#<ActionDispatch::RemoteIp:0x00000003a67dd8[0m
+                                      @app[32m=[0m
+                                       [32m#<ActionDispatch::Reloader:0x00000003a67e28[0m
+                                        @app[32m=[0m
+                                         [32m#<ActionDispatch::Callbacks:0x00000003a67e50[0m
+                                          @app[32m=[0m
+                                           [32m#<ActiveRecord::Migration::CheckPending:0x00000003a67e78[0m
+                                            @app[32m=[0m
+                                             [32m#<ActionDispatch::Cookies:0x00000003a67ea0[0m
+                                              @app[32m=[0m
+                                               [32m#<ActionDispatch::Session::CookieStore:0x00000003a67f40[0m
+                                                @app[32m=[0m
+                                                 [32m#<Rack::Head:0x00000003a67f68[0m
+                                                  @app[32m=[0m
+                                                   [32m#<Rack::ConditionalGet:0x00000003a67f90[0m
+                                                    @app[32m=[0m
+                                                     [32m#<Rack::ETag:0x0000000276e600[0m
+                                                      @app[32m=[0m
+                                                       [32m#<Warden::Manager:0x0000000276cad0[0m
+                                                        @app[32m=[0m[32m#<ActionDispatch::Routing::RouteSet:0x00000004106158>[0m,
+                                                        @config[32m=[0m
+                                                         {[33m:default_scope[0m=>[33m:patient[0m,
+                                                          [33m:scope_defaults[0m=>{},
+                                                          [33m:default_strategies[0m=>
+                                                           {[33m:patient[0m=>[[33m:rememberable[0m, [33m:database_authenticatable[0m],
+                                                            [33m:admin[0m=>[[33m:rememberable[0m, [33m:database_authenticatable[0m]},
+                                                          [33m:intercept_401[0m=>[1;36mfalse[0m,
+                                                          [33m:failure_app[0m=>[32m#<Devise::Delegator:0x00000005ed81e0[0m[32m>[0m}[32m>[0m,
+                                                      @cache_control[32m=[0m[31m[1;31m"[0m[31mmax-age=0, private, must-revalidate[1;31m"[0m[31m[0m,
+                                                      @no_cache_control[32m=[0m[31m[1;31m"[0m[31mno-cache[1;31m"[0m[31m[0m[32m>[0m[32m>[0m[32m>[0m,
+                                                @cookie_only[32m=[0m[1;36mtrue[0m,
+                                                @default_options[32m=[0m
+                                                 {[33m:path[0m=>[31m[1;31m"[0m[31m/[1;31m"[0m[31m[0m,
+                                                  [33m:domain[0m=>[1;36mnil[0m,
+                                                  [33m:expire_after[0m=>[1;36mnil[0m,
+                                                  [33m:secure[0m=>[1;36mfalse[0m,
+                                                  [33m:httponly[0m=>[1;36mtrue[0m,
+                                                  [33m:defer[0m=>[1;36mfalse[0m,
+                                                  [33m:renew[0m=>[1;36mfalse[0m},
+                                                @key[32m=[0m[31m[1;31m"[0m[31m_activity_tracker_session[1;31m"[0m[31m[0m[32m>[0m[32m>[0m,
+                                            @last_check[32m=[0m[1;34m1470468450[0m[32m>[0m[32m>[0m,
+                                        @executor[32m=[0m[32m#<Class:0x0000000550eb00>[0m[32m>[0m,
+                                      @check_ip[32m=[0m[1;36mtrue[0m,
+                                      @proxies[32m=[0m
+                                       [[32m#<IPAddr: IPv4:127.0.0.1/255.255.255.255>[0m,
+                                        [32m#<IPAddr: IPv6:0000:0000:0000:0000:0000:0000:0000:0001/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff>[0m,
+                                        [32m#<IPAddr: IPv6:fc00:0000:0000:0000:0000:0000:0000:0000/fe00:0000:0000:0000:0000:0000:0000:0000>[0m,
+                                        [32m#<IPAddr: IPv4:10.0.0.0/255.0.0.0>[0m,
+                                        [32m#<IPAddr: IPv4:172.16.0.0/255.240.0.0>[0m,
+                                        [32m#<IPAddr: IPv4:192.168.0.0/255.255.0.0>[0m][32m>[0m,
+                                    @response_format[32m=[0m[33m:default[0m,
+                                    @routes_app[32m=[0m[32m#<ActivityTracker::Application:0x000000054e4e90[0m ...[32m>[0m[32m>[0m[32m>[0m,
+                                @exceptions_app[32m=[0m
+                                 [32m#<ActionDispatch::PublicExceptions:0x00000005f56ae0[0m
+                                  @public_path[32m=[0m[32m#<Pathname:/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/public>[0m[32m>[0m[32m>[0m,
+                              @taggers[32m=[0m[][32m>[0m,
+                            @assets_regex[32m=[0m[35m[1;35m/[0m[35m[1;35m\A[0m[35m[1;35m\/[0m[35m{0,2}[1;35m\/[0m[35massets[1;35m/[0m[35m[0m[32m>[0m[32m>[0m[32m>[0m,
+                      @header_name[32m=[0m[31m[1;31m"[0m[31mX-Runtime[1;31m"[0m[31m[0m[32m>[0m,
+                    @local_cache_key[32m=[0m[33m:active_support_cache_null_store_local_cache_45390560[0m,
+                    @name[32m=[0m[31m[1;31m"[0m[31mActiveSupport::Cache::Strategy::LocalCache[1;31m"[0m[31m[0m[32m>[0m,
+                  @executor[32m=[0m[32m#<Class:0x000000041bc818>[0m[32m>[0m,
+                @file_handler[32m=[0m
+                 [32m#<ActionDispatch::FileHandler:0x00000003a67928[0m
+                  @file_server[32m=[0m
+                   [32m#<Rack::File:0x00000003a67860[0m
+                    @default_mime[32m=[0m[31m[1;31m"[0m[31mtext/plain[1;31m"[0m[31m[0m,
+                    @head[32m=[0m
+                     [32m#<Rack::Head:0x00000003a677c0[0m
+                      @app[32m=[0m[32m#<Proc:0x00000003a677e8@/home/cis455/.rvm/gems/ruby-2.2.2/gems/rack-2.0.1/lib/rack/file.rb:26 (lambda)>[0m[32m>[0m,
+                    @headers[32m=[0m{},
+                    @root[32m=[0m[31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/public[1;31m"[0m[31m[0m[32m>[0m,
+                  @index[32m=[0m[31m[1;31m"[0m[31mindex[1;31m"[0m[31m[0m,
+                  @root[32m=[0m[31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/public[1;31m"[0m[31m[0m[32m>[0m[32m>[0m,
+              @mappings[32m=[0m[],
+              @variation[32m=[0m[1;36mnil[0m[32m>[0m,
+            @app_build_lock[32m=[0m[32m#<Mutex:0x000000054e4e40[0m[32m>[0m,
+            @app_env_config[32m=[0m
+             {[31m[1;31m"[0m[31maction_dispatch.parameter_filter[1;31m"[0m[31m[0m=>[[33m:password[0m],
+              [31m[1;31m"[0m[31maction_dispatch.redirect_filter[1;31m"[0m[31m[0m=>[],
+              [31m[1;31m"[0m[31maction_dispatch.secret_token[1;31m"[0m[31m[0m=>[1;36mnil[0m,
+              [31m[1;31m"[0m[31maction_dispatch.secret_key_base[1;31m"[0m[31m[0m=>
+               [31m[1;31m"[0m[31mede0d389c00da76c55597987dcaad88319b03c57cd68e295ad0f10fae93abef184026a38736185d5175f25d091afa2f424b4465a39a96e1ec1dfaf066d006724[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31maction_dispatch.show_exceptions[1;31m"[0m[31m[0m=>[1;36mtrue[0m,
+              [31m[1;31m"[0m[31maction_dispatch.show_detailed_exceptions[1;31m"[0m[31m[0m=>[1;36mtrue[0m,
+              [31m[1;31m"[0m[31maction_dispatch.logger[1;31m"[0m[31m[0m=>
+               [32m#<ActiveSupport::Logger:0x000000040a3990[0m
+                @default_formatter[32m=[0m[32m#<Logger::Formatter:0x000000040a3918[0m @datetime_format[32m=[0m[1;36mnil[0m[32m>[0m,
+                @formatter[32m=[0m
+                 [32m#<ActiveSupport::Logger::SimpleFormatter:0x0000000550de80[0m
+                  @datetime_format[32m=[0m[1;36mnil[0m,
+                  @thread_key[32m=[0m[31m[1;31m"[0m[31mactivesupport_tagged_logging_tags:44592960[1;31m"[0m[31m[0m[32m>[0m,
+                @level[32m=[0m[1;34m0[0m,
+                @local_levels[32m=[0m[32m#<Concurrent::Map:0x000000040a36e8 entries=0 default_proc=nil>[0m,
+                @logdev[32m=[0m
+                 [32m#<Logger::LogDevice:0x000000040a3878[0m
+                  @dev[32m=[0m[32m#<File:/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/log/development.log>[0m,
+                  @filename[32m=[0m[1;36mnil[0m,
+                  @mutex[32m=[0m[32m#<Logger::LogDevice::LogDeviceMutex:0x000000040a3850[0m @mon_count[32m=[0m[1;34m0[0m, @mon_mutex[32m=[0m[32m#<Mutex:0x000000040a3788[0m[32m>[0m, @mon_owner[32m=[0m[1;36mnil[0m[32m>[0m,
+                  @shift_age[32m=[0m[1;36mnil[0m,
+                  @shift_size[32m=[0m[1;36mnil[0m[32m>[0m,
+                @progname[32m=[0m[1;36mnil[0m[32m>[0m,
+              [31m[1;31m"[0m[31maction_dispatch.backtrace_cleaner[1;31m"[0m[31m[0m=>
+               [32m#<Rails::BacktraceCleaner:0x00000005c0ab70[0m
+                @filters[32m=[0m
+                 [[32m#<Proc:0x00000005c0aa58@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/backtrace_cleaner.rb:14>[0m,
+                  [32m#<Proc:0x00000005c0aa30@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/backtrace_cleaner.rb:15>[0m,
+                  [32m#<Proc:0x00000005c0aa08@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/backtrace_cleaner.rb:16>[0m,
+                  [32m#<Proc:0x00000005c0a558@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/backtrace_cleaner.rb:29>[0m],
+                @root[32m=[0m[31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/[1;31m"[0m[31m[0m,
+                @silencers[32m=[0m[[32m#<Proc:0x00000005c0a530@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/backtrace_cleaner.rb:19>[0m][32m>[0m,
+              [31m[1;31m"[0m[31maction_dispatch.key_generator[1;31m"[0m[31m[0m=>
+               [32m#<ActiveSupport::CachingKeyGenerator:0x00000005cc5358[0m
+                @cache_keys[32m=[0m[32m#<Concurrent::Map:0x00000005cc5330 entries=4 default_proc=nil>[0m,
+                @key_generator[32m=[0m
+                 [32m#<ActiveSupport::KeyGenerator:0x00000005cc5380[0m
+                  @iterations[32m=[0m[1;34m1000[0m,
+                  @secret[32m=[0m
+                   [31m[1;31m"[0m[31mede0d389c00da76c55597987dcaad88319b03c57cd68e295ad0f10fae93abef184026a38736185d5175f25d091afa2f424b4465a39a96e1ec1dfaf066d006724[1;31m"[0m[31m[0m[32m>[0m[32m>[0m,
+              [31m[1;31m"[0m[31maction_dispatch.http_auth_salt[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mhttp authentication[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31maction_dispatch.signed_cookie_salt[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31msigned cookie[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31maction_dispatch.encrypted_cookie_salt[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mencrypted cookie[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31maction_dispatch.encrypted_signed_cookie_salt[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31msigned encrypted cookie[1;31m"[0m[31m[0m,
+              [31m[1;31m"[0m[31maction_dispatch.cookies_serializer[1;31m"[0m[31m[0m=>[33m:json[0m,
+              [31m[1;31m"[0m[31maction_dispatch.cookies_digest[1;31m"[0m[31m[0m=>[1;36mnil[0m},
+            @assets[32m=[0m
+             [32m#<Sprockets::Environment:0x2e81dd4 root="/home/cis455/workspace/rails/Activity-Tracker/activity_tracker", paths=["/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/assets/config", "/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/assets/images", "/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/assets/javascripts", "/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/assets/stylesheets", "/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/vendor/assets/javascripts", "/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/vendor/assets/stylesheets", "/home/cis455/.rvm/gems/ruby-2.2.2/gems/jquery-rails-4.1.1/vendor/assets/javascripts", "/home/cis455/.rvm/gems/ruby-2.2.2/gems/coffee-rails-4.2.1/lib/assets/javascripts", "/home/cis455/.rvm/gems/ruby-2.2.2/gems/actioncable-5.0.0/lib/assets/compiled", "/home/cis455/.rvm/gems/ruby-2.2.2/gems/turbolinks-source-5.0.0/lib/assets/javascripts"]>[0m,
+            @assets_manifest[32m=[0m
+             [32m#<Sprockets::Manifest:0x00000005cd34f8[0m
+              @data[32m=[0m{},
+              @directory[32m=[0m[31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/public/assets[1;31m"[0m[31m[0m,
+              @environment[32m=[0m
+               [32m#<Sprockets::Environment:0x2e81dd4 root="/home/cis455/workspace/rails/Activity-Tracker/activity_tracker", paths=["/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/assets/config", "/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/assets/images", "/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/assets/javascripts", "/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/assets/stylesheets", "/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/vendor/assets/javascripts", "/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/vendor/assets/stylesheets", "/home/cis455/.rvm/gems/ruby-2.2.2/gems/jquery-rails-4.1.1/vendor/assets/javascripts", "/home/cis455/.rvm/gems/ruby-2.2.2/gems/coffee-rails-4.2.1/lib/assets/javascripts", "/home/cis455/.rvm/gems/ruby-2.2.2/gems/actioncable-5.0.0/lib/assets/compiled", "/home/cis455/.rvm/gems/ruby-2.2.2/gems/turbolinks-source-5.0.0/lib/assets/javascripts"]>[0m,
+              @filename[32m=[0m
+               [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/public/assets/.sprockets-manifest-4d2973d6e95b0a37957447fc0af48b3d.json[1;31m"[0m[31m[0m,
+              @legacy_manifest[32m=[0m[1;36mfalse[0m,
+              @rename_filename[32m=[0m[1;36mnil[0m[32m>[0m,
+            @block[32m=[0m[1;36mnil[0m,
+            @caching_key_generator[32m=[0m
+             [32m#<ActiveSupport::CachingKeyGenerator:0x00000005cc5358[0m
+              @cache_keys[32m=[0m[32m#<Concurrent::Map:0x00000005cc5330 entries=4 default_proc=nil>[0m,
+              @key_generator[32m=[0m
+               [32m#<ActiveSupport::KeyGenerator:0x00000005cc5380[0m
+                @iterations[32m=[0m[1;34m1000[0m,
+                @secret[32m=[0m
+                 [31m[1;31m"[0m[31mede0d389c00da76c55597987dcaad88319b03c57cd68e295ad0f10fae93abef184026a38736185d5175f25d091afa2f424b4465a39a96e1ec1dfaf066d006724[1;31m"[0m[31m[0m[32m>[0m[32m>[0m,
+            @config[32m=[0m
+             [32m#<Rails::Application::Configuration:0x0000000550e4e8[0m
+              @allow_concurrency[32m=[0m[1;36mnil[0m,
+              @api_only[32m=[0m[1;36mfalse[0m,
+              @autoflush_log[32m=[0m[1;36mtrue[0m,
+              @autoload_once_paths[32m=[0m[],
+              @autoload_paths[32m=[0m[],
+              @beginning_of_week[32m=[0m[33m:monday[0m,
+              @cache_classes[32m=[0m[1;36mfalse[0m,
+              @cache_store[32m=[0m[33m:null_store[0m,
+              @consider_all_requests_local[32m=[0m[1;36mtrue[0m,
+              @debug_exception_response_format[32m=[0m[1;36mnil[0m,
+              @eager_load[32m=[0m[1;36mfalse[0m,
+              @eager_load_paths[32m=[0m
+               [[31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/assets[1;31m"[0m[31m[0m,
+                [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/channels[1;31m"[0m[31m[0m,
+                [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/controllers[1;31m"[0m[31m[0m,
+                [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/controllers/concerns[1;31m"[0m[31m[0m,
+                [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/helpers[1;31m"[0m[31m[0m,
+                [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/jobs[1;31m"[0m[31m[0m,
+                [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/mailers[1;31m"[0m[31m[0m,
+                [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/models[1;31m"[0m[31m[0m,
+                [31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/models/concerns[1;31m"[0m[31m[0m],
+              @enable_dependency_loading[32m=[0m[1;36mfalse[0m,
+              @encoding[32m=[0m[31m[1;31m"[0m[31mutf-8[1;31m"[0m[31m[0m,
+              @exceptions_app[32m=[0m[1;36mnil[0m,
+              @file_watcher[32m=[0m[1;34;4mActiveSupport[0m::[1;34;4mEventedFileUpdateChecker[0m,
+              @filter_parameters[32m=[0m[[33m:password[0m],
+              @filter_redirect[32m=[0m[],
+              @force_ssl[32m=[0m[1;36mfalse[0m,
+              @generators[32m=[0m
+               [32m#<Rails::Configuration::Generators:0x00000002eaf8b0[0m
+                @aliases[32m=[0m{},
+                @api_only[32m=[0m[1;36mfalse[0m,
+                @colorize_logging[32m=[0m[1;36mtrue[0m,
+                @fallbacks[32m=[0m{},
+                @hidden_namespaces[32m=[0m[[31m[1;31m"[0m[31msass[1;31m"[0m[31m[0m],
+                @options[32m=[0m
+                 {[33m:rails[0m=>
+                   {[33m:orm[0m=>[33m:active_record[0m,
+                    [33m:test_framework[0m=>[33m:test_unit[0m,
+                    [33m:integration_tool[0m=>[33m:test_unit[0m,
+                    [33m:stylesheet_engine[0m=>[33m:scss[0m,
+                    [33m:javascript_engine[0m=>[33m:coffee[0m},
+                  [33m:active_record[0m=>{[33m:migration[0m=>[1;36mtrue[0m, [33m:timestamps[0m=>[1;36mtrue[0m},
+                  [33m:test_unit[0m=>{[33m:fixture[0m=>[1;36mtrue[0m, [33m:fixture_replacement[0m=>[1;36mnil[0m}},
+                @templates[32m=[0m[][32m>[0m,
+              @helpers_paths[32m=[0m
+               [[31m[1;31m"[0m[31m/home/cis455/workspace/rails/Activity-Tracker/activity_tracker/app/helpers[1;31m"[0m[31m[0m,
+                [31m[1;31m"[0m[31m/home/cis455/.rvm/gems/ruby-2.2.2/gems/devise-4.2.0/app/helpers[1;31m"[0m[31m[0m],
+              @log_formatter[32m=[0m
+               [32m#<ActiveSupport::Logger::SimpleFormatter:0x0000000550de80[0m
+                @datetime_format[32m=[0m[1;36mnil[0m,
+                @thread_key[32m=[0m[31m[1;31m"[0m[31mactivesupport_tagged_logging_tags:44592960[1;31m"[0m[31m[0m[32m>[0m,
+              @log_level[32m=[0m[33m:debug[0m,
+              @middleware[32m=[0m
+               [32m#<ActionDispatch::MiddlewareStack:0x00000005e89090[0m
+                @middlewares[32m=[0m
+                 [[1;34;4mRack[0m::[1;34;4mSendfile[0m,
+                  [1;34;4mActionDispatch[0m::[1;34;4mStatic[0m,
+                  [1;34;4mActionDispatch[0m::[1;34;4mExecutor[0m,
+                  [1;34;4mActiveSupport[0m::[1;34;4mCache[0m::[1;34;4mStrategy[0m::[1;34;4mLocalCache[0m::[1;34;4mMiddleware[0m,
+                  [1;34;4mRack[0m::[1;34;4mRuntime[0m,
+                  [1;34;4mRack[0m::[1;34;4mMethodOverride[0m,
+                  [1;34;4mActionDispatch[0m::[1;34;4mRequestId[0m,
+                  [1;34;4mSprockets[0m::[1;34;4mRails[0m::[1;34;4mQuietAssets[0m,
+                  [1;34;4mRails[0m::[1;34;4mRack[0m::[1;34;4mLogger[0m,
+                  [1;34;4mActionDispatch[0m::[1;34;4mShowExceptions[0m,
+                  [1;34;4mWebConsole[0m::[1;34;4mMiddleware[0m,
+                  [1;34;4mActionDispatch[0m::[1;34;4mDebugExceptions[0m,
+                  [1;34;4mActionDispatch[0m::[1;34;4mRemoteIp[0m,
+                  [1;34;4mActionDispatch[0m::[1;34;4mReloader[0m,
+                  [1;34;4mActionDispatch[0m::[1;34;4mCallbacks[0m,
+                  [1;34;4mActiveRecord[0m::[1;34;4mMigration[0m::[1;34;4mCheckPending[0m,
+                  [1;34;4mActionDispatch[0m::[1;34;4mCookies[0m,
+                  [1;34;4mActionDispatch[0m::[1;34;4mSession[0m::[1;34;4mCookieStore[0m,
+                  [1;34;4mActionDispatch[0m::[1;34;4mFlash[0m,
+                  [1;34;4mRack[0m::[1;34;4mHead[0m,
+                  [1;34;4mRack[0m::[1;34;4mConditionalGet[0m,
+                  [1;34;4mRack[0m::[1;34;4mETag[0m,
+                  [1;34;4mWarden[0m::[1;34;4mManager[0m][32m>[0m,
+              @paths[32m=[0m
+               [32m#<Rails::Paths::Root:0x000000055a5438[0m
+                @current[32m=[0m[1;36mnil[0m,
+                @path[32m=[0m[32m#<Pathname:/home/cis455/workspace/rails/Activity-Tracker/activity_tracker>[0m,
+                @root[32m=[0m
+                 {[31m[1;31m"[0m[31mapp[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a5348[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mapp[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mtrue[0m,
+                    @glob[32m=[0m[31m[1;31m"[0m[31m{*,*/concerns}[1;31m"[0m[31m[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mapp[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mapp/assets[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a5258[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mapp/assets[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[31m[1;31m"[0m[31m*[1;31m"[0m[31m[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mapp/assets[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mapp/controllers[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a5190[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mapp/controllers[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mtrue[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mapp/controllers[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mapp/channels[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a50a0[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mapp/channels[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mtrue[0m,
+                    @glob[32m=[0m[31m[1;31m"[0m[31m**/*_channel.rb[1;31m"[0m[31m[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mapp/channels[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mapp/helpers[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4fd8[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mapp/helpers[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mtrue[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mapp/helpers[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mapp/models[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4f10[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mapp/models[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mtrue[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mapp/models[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mapp/mailers[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4e48[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mapp/mailers[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mtrue[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mapp/mailers[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mapp/views[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4d80[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mapp/views[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mapp/views[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mlib[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4cb8[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mlib[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mtrue[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mlib[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mlib/assets[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4bc8[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mlib/assets[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[31m[1;31m"[0m[31m*[1;31m"[0m[31m[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mlib/assets[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mlib/tasks[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4ad8[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mlib/tasks[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[31m[1;31m"[0m[31m**/*.rake[1;31m"[0m[31m[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mlib/tasks[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mconfig[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4a10[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mconfig[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mconfig[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mconfig/environments[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4920[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mconfig/environments[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[31m[1;31m"[0m[31mdevelopment.rb[1;31m"[0m[31m[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mconfig/environments[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mconfig/initializers[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4830[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mconfig/initializers[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[31m[1;31m"[0m[31m**/*.rb[1;31m"[0m[31m[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mconfig/initializers[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mconfig/locales[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4740[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mconfig/locales[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[31m[1;31m"[0m[31m*.{rb,yml}[1;31m"[0m[31m[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mconfig/locales[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mconfig/routes.rb[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4678[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mconfig/routes.rb[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mconfig/routes.rb[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mdb[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a45b0[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mdb[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mdb[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mdb/migrate[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a44e8[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mdb/migrate[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mdb/migrate[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mdb/seeds.rb[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4420[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mdb/seeds.rb[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mdb/seeds.rb[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mvendor[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4358[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mvendor[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mtrue[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mvendor[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mvendor/assets[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4268[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mvendor/assets[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[31m[1;31m"[0m[31m*[1;31m"[0m[31m[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mvendor/assets[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mconfig/database[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4178[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mconfig/database[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mconfig/database.yml[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mconfig/secrets[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000055a4088[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mconfig/secrets[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mconfig/secrets.yml[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mconfig/environment[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x00000004113e70[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mconfig/environment[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mconfig/environment.rb[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mlib/templates[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x00000004113da8[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mlib/templates[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mlib/templates[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mlog[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x00000004113c90[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mlog[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mlog/development.log[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mpublic[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x00000004113b78[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mpublic[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mpublic[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mpublic/javascripts[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x00000004113a10[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mpublic/javascripts[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mpublic/javascripts[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mpublic/stylesheets[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000041138f8[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mpublic/stylesheets[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mpublic/stylesheets[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mtmp[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x000000041137b8[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mtmp[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mtmp[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m,
+                  [31m[1;31m"[0m[31mconfig/cable[1;31m"[0m[31m[0m=>
+                   [32m#<Rails::Paths::Path:0x00000005cf0418[0m
+                    @autoload[32m=[0m[1;36mfalse[0m,
+                    @autoload_once[32m=[0m[1;36mfalse[0m,
+                    @current[32m=[0m[31m[1;31m"[0m[31mconfig/cable[1;31m"[0m[31m[0m,
+                    @eager_load[32m=[0m[1;36mfalse[0m,
+                    @glob[32m=[0m[1;36mnil[0m,
+                    @load_path[32m=[0m[1;36mfalse[0m,
+                    @paths[32m=[0m[[31m[1;31m"[0m[31mconfig/cable.yml[1;31m"[0m[31m[0m],
+                    @root[32m=[0m[32m#<Rails::Paths::Root:0x000000055a5438[0m ...[32m>[0m[32m>[0m}[32m>[0m,
+              @public_file_server[32m=[0m{[33m:enabled[0m=>[1;36mtrue[0m, [33m:index_name[0m=>[31m[1;31m"[0m[31mindex[1;31m"[0m[31m[0m},
+              @railties_order[32m=[0m[[33m:all[0m],
+              @relative_url_root[32m=[0m[1;36mnil[0m,
+              @reload_classes_only_on_change[32m=[0m[1;36mtrue[0m,
+              @root[32m=[0m[32m#<Pathname:/home/cis455/workspace/rails/Activity-Tracker/activity_tracker>[0m,
+              @secret_key_base[32m=[0m[1;36mnil[0m,
+              @secret_token[32m=[0m[1;36mnil[0m,
+              @session_options[32m=[0m{[33m:key[0m=>[31m[1;31m"[0m[31m_activity_tracker_session[1;31m"[0m[31m[0m, [33m:cookie_only[0m=>[1;36mtrue[0m},
+              @session_store[32m=[0m[33m:cookie_store[0m,
+              @ssl_options[32m=[0m{[33m:hsts[0m=>{[33m:subdomains[0m=>[1;36mtrue[0m}},
+              @time_zone[32m=[0m[31m[1;31m"[0m[31mUTC[1;31m"[0m[31m[0m,
+              @x[32m=[0m[32m#<Rails::Application::Configuration::Custom:0x0000000550de58[0m @configurations[32m=[0m{}[32m>[0m[32m>[0m,
+            @env_config[32m=[0m{},
+            @executor[32m=[0m[32m#<Class:0x000000041bc818>[0m,
+            @helpers[32m=[0m[1;36mnil[0m,
+            @initial_variable_values[32m=[0m{},
+            @initialized[32m=[0m[1;36mtrue[0m,
+            @initializers[32m=[0m
+             [[32m#<Rails::Initializable::Initializer:0x00000005554e98[0m
+               @block[32m=[0m[32m#<Proc:0x00000002f82940@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/engine.rb:553>[0m,
+               @context[32m=[0m[32m#<ActivityTracker::Application:0x000000054e4e90[0m ...[32m>[0m,
+               @name[32m=[0m[33m:set_load_path[0m,
+               @options[32m=[0m{[33m:before[0m=>[33m:bootstrap_hook[0m, [33m:group[0m=>[33m:default[0m}[32m>[0m,
+              [32m#<Rails::Initializable::Initializer:0x00000005554e48[0m
+               @block[32m=[0m[32m#<Proc:0x00000002f825f8@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/engine.rb:565>[0m,
+               @context[32m=[0m[32m#<ActivityTracker::Application:0x000000054e4e90[0m ...[32m>[0m,
+               @name[32m=[0m[33m:set_autoload_paths[0m,
+               @options[32m=[0m{[33m:before[0m=>[33m:bootstrap_hook[0m, [33m:after[0m=>[33m:set_load_path[0m, [33m:group[0m=>[33m:default[0m}[32m>[0m,
+              [32m#<Rails::Initializable::Initializer:0x00000005554df8[0m
+               @block[32m=[0m[32m#<Proc:0x00000002f824e0@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/engine.rb:575>[0m,
+               @context[32m=[0m[32m#<ActivityTracker::Application:0x000000054e4e90[0m ...[32m>[0m,
+               @name[32m=[0m[33m:add_routing_paths[0m,
+               @options[32m=[0m{[33m:after[0m=>[33m:set_autoload_paths[0m, [33m:group[0m=>[33m:default[0m}[32m>[0m,
+              [32m#<Rails::Initializable::Initializer:0x00000005554da8[0m
+               @block[32m=[0m[32m#<Proc:0x00000002f82378@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/engine.rb:586>[0m,
+               @context[32m=[0m[32m#<ActivityTracker::Application:0x000000054e4e90[0m ...[32m>[0m,
+               @name[32m=[0m[33m:add_locales[0m,
+               @options[32m=[0m{[33m:after[0m=>[33m:add_routing_paths[0m, [33m:group[0m=>[33m:default[0m}[32m>[0m,
+              [32m#<Rails::Initializable::Initializer:0x00000005554d58[0m
+               @block[32m=[0m[32m#<Proc:0x00000002f82210@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/engine.rb:590>[0m,
+               @context[32m=[0m[32m#<ActivityTracker::Application:0x000000054e4e90[0m ...[32m>[0m,
+               @name[32m=[0m[33m:add_view_paths[0m,
+               @options[32m=[0m{[33m:after[0m=>[33m:add_locales[0m, [33m:group[0m=>[33m:default[0m}[32m>[0m,
+              [32m#<Rails::Initializable::Initializer:0x00000005554d08[0m
+               @block[32m=[0m[32m#<Proc:0x00000002f81fe0@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/engine.rb:598>[0m,
+               @context[32m=[0m[32m#<ActivityTracker::Application:0x000000054e4e90[0m ...[32m>[0m,
+               @name[32m=[0m[33m:load_environment_config[0m,
+               @options[32m=[0m{[33m:before[0m=>[33m:load_environment_hook[0m, [33m:group[0m=>[33m:all[0m, [33m:after[0m=>[33m:add_view_paths[0m}[32m>[0m,
+              [32m#<Rails::Initializable::Initializer:0x00000005554cb8[0m
+               @block[32m=[0m[32m#<Proc:0x00000002f81ea0@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/engine.rb:604>[0m,
+               @context[32m=[0m[32m#<ActivityTracker::Application:0x000000054e4e90[0m ...[32m>[0m,
+               @name[32m=[0m[33m:prepend_helpers_path[0m,
+               @options[32m=[0m{[33m:after[0m=>[33m:load_environment_config[0m, [33m:group[0m=>[33m:default[0m}[32m>[0m,
+              [32m#<Rails::Initializable::Initializer:0x00000005554c68[0m
+               @block[32m=[0m[32m#<Proc:0x00000002f81d38@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/engine.rb:610>[0m,
+               @context[32m=[0m[32m#<ActivityTracker::Application:0x000000054e4e90[0m ...[32m>[0m,
+               @name[32m=[0m[33m:load_config_initializers[0m,
+               @options[32m=[0m{[33m:after[0m=>[33m:prepend_helpers_path[0m, [33m:group[0m=>[33m:default[0m}[32m>[0m,
+              [32m#<Rails::Initializable::Initializer:0x00000005554c18[0m
+               @block[32m=[0m[32m#<Proc:0x00000002f81bf8@/home/cis455/.rvm/gems/ruby-2.2.2/gems/railties-5.0.0/lib/rails/engine.rb:616>[0m,
+               @context[32m=[0m[32m#<ActivityTracker::Application:0x000000054e4e90[0m ...[32m>[0m,
+               @name[32m=[0m[33m:engines_blank_point[0m,
+               @options[32m=[0m{[33m:after[0m=>[33m:load_config_initializers[0m, [33m:group[0m=>[33m:default[0m}[32m>[0m,
+              [32m#<Rails::Initializable::Initializer:0x00000005554bc8[0m
+               @block[32m=[0m[32m#<Proc:0x00000004315ac0@/home/cis455/.rvm/gems/ruby-2.2.2/gems/sprockets-rails-3.1.1/lib/sprockets/railtie.rb:57>[0m,
+               @context[32m=[0m[32m#<ActivityTracker::Application:0x000000054e4e90[0m ...[32m>[0m,
+               @name[32m=[0m[33m:append_assets_path[0m,
+               @options[32m=[0m{[33m:group[0m=>[33m:all[0m, [33m:after[0m=>[33m:engines_blank_point[0m}[32m>[0m],
+            @message_verifiers[32m=[0m
+             {[33m:signed_global_ids[0m=>
+               [32m#<ActiveSupport::MessageVerifier:0x00000005cc51c8[0m
+                @digest[32m=[0m[31m[1;31m"[0m[31mSHA1[1;31m"[0m[31m[0m,
+                @secret[32m=[0m
+                 [31m[1;31m"[0m[31m[1;35m\xAC[0m[31m[1;35m\xE2[0m[31m[1;35m\xE8[0m[31m[1;35m\xFA[0m[31m[1;35m\xDD[0m[31m(T*[1;35m\x99[0m[31m[1;35m\x88[0m[31m[1;35m\xFF[0m[31m$[1;35m\x83[0m[31m[1;35m\x81[0m[31m[1;35m\xB3[0m[31m[1;35m\xAC[0m[31ms[1;35m\x9F[0m[31m>[1;35m\xB0[0m[31mr[1;35m\xDC[0m[31m[1;35m\xA3[0m[31m[1;35m\xCC[0m[31mVl[1;35m\\[0m[31m[1;35m\x9D[0m[31m[1;35m\n[0m[31m[1;35m\x9C[0m[31m?[1;35m\xEC[0m[31mh[1;35m\x9E[0m[31m[1;35m\xD3[0m[31mq+[1;35m\xE3[0m[31m[1;35m\xF9[0m[31m[1;35m\xF8[0m[31mp[1;35m\xC4[0m[31m[1;35m\xE6[0m[31m[1;35m\v[0m[31mI[1;35m\x9B[0m[31m]A[1;35m\x10[0m[31m[1;35m\v[0m[31mS[1;35m\xC9[0m[31m[1;35m\xD2[0m[31m[1;35m\x7F[0m[31m[1;35m\x87[0m[31m[1;35m\xCA[0m[31m[1;35m\xCA[0m[31m5[1;35m\xA4[0m[31m[1;35m\x06[0m[31m[1;35m\x8A[0m[31m[1;35m\xBC[0m[31m[1;35m\xC7[0m[31m[1;35m\x1C[0m[31m[1;31m"[0m[31m[0m,
+                @serializer[32m=[0m[1;34;4mMarshal[0m[32m>[0m},
+            @ordered_railties[32m=[0m
+             [[[32m#<I18n::Railtie:0x00000002f871e8[0m @config[32m=[0m[32m#<Rails::Railtie::Configuration:0x0000000276e150[0m[32m>[0m, @initializers[32m=[0m[][32m>[0m,
+               [32m#<ActiveSupport::Railtie:0x0000000276c0d0[0m
+                @config[32m=[0m[32m#<Rails::Railtie::Configuration:0x0000000276dbd8[0m[32m>[0m,
+                @initializers[32m=[0m
+                 [[32m#<Rails::Initializable::Initializer:0x00000005554380[0m
+                   @block[32m=[0m[32m#<Proc:0x0000000276b478@/home/cis455/.rvm/gems/ruby-2.2.2/gems/activesupport-5.0.0/lib/active_support/railtie.rb:10>[0m,
+                   @context[32m=[0m[32m#<ActiveSupport::Railtie:0x0000000276c0d0[0m ...[32m>[0m,
+                   @name[32m=[0m[31m[1;31m"[0m[31mactive_support.deprecation_behavior[1;31m"[0m[31m[0m,
+                   @options[32m=[0m{[33m:group[0m=>[33m:default[0m}[32m>[0m,
+                  [32m#<Rails::Initializable::Initializer:0x00000005554330[0m
+                   @block[32m=[0m[32m#<Proc:0x0000000276af78@/home/cis455/.rvm/gems/ruby-2.2.2/gems/activesupport-5.0.0/lib/active_support/railtie.rb:18>[0m,
+                   @context[32m=[0m[32m#<ActiveSupport::Railtie:0x0000000276c0d0[0m ...[32m>[0m,
+                   @name[32m=[0m[31m[1;31m"[0m[31mactive_support.initialize_time_zone[1;31m"[0m[31m[0m,
+                   @options[32m=[0m{[33m:after[0m=>[31m[1;31m"[0m[31mactive_support.deprecation_behavior[1;31m"[0m[31m[0m, [33m:group[0m=>[33m:default[0m}[32m>[0m,
+                  [32m#<Rails::Initializable::Initializer:0x000000055542e0[0m
+                   @block[32m=[0m[32m#<Proc:0x0000000276ab40@/home/cis455/.rvm/gems/ruby-2.2.2/gems/activesupport-5.0.0/lib/active_support/railtie.rb:37>[0m,
+                   @context[32m=[0m[32m#<ActiveSupport::Railtie:0x0000000276c0d0[0m ...[32m>[0m,
+                   @name[32m=[0m[31m[1;31m"[0m[31mactive_support.initialize_beginning_of_week[1;31m"[0m[31m[0m,
+                   @options[32m=[0m{[33m:after[0m=>[31m[1;31m"[0m[31mactive_support.initialize_time_zone[1;31m"[0m[31m[0m, [33m:group[0m=>[33m:default[0m}[32m>[0m,
+                  [32m#<Rails::Initializable::Initializer:0x00000005554290[0m
+                   @block[32m=[0m[32m#<Proc:0x0000000276a910@/home/cis455/.rvm/gems/ruby-2.2.2/gems/activesupport-5.0.0/lib/active_support/railtie.rb:44>[0m,
+                   @context[32m=[0m[32m#<ActiveSupport::Railtie:0x0000000276c0d0[0m ...[32m>[0m,
+                   @name[32m=[0m[31m[1;31m"[0m[31mactive_support.set_configs[1;31m"[0m[31m[0m,
+                   @options[32m=[0m{[33m:after[0m=>[31m[1;31m"[0m[31mactive_support.initialize_beginning_of_week[1;31m"[0m[31m[0m, [33m:group[0m=>[33m:default[0m}[32m>[0m][32m>[0m,
+               [32m#<ActionDispatch::Railtie:0x000000027315e8[0m
+                @config[32m=[0m[32m#<Rails::Railtie::Configuration:0x00000002731570[0m[32m>[0m,
+                @initializers[32m=[0m
+                 [[32m#<Rails::Initializable::Initializer:0x00000005554010[0m
+                   @block[32m=[0m[32m#<Proc:0x0000000272e5c8@/home/cis455/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.0/lib/action_dispatch/railtie.rb:29>[0m,
+                   @context[32m=[0m[32m#<ActionDispatch::Railtie:0x000000027315e8[0m ...[32m>[0m,
+                   @name[32m=[0m[31m[1;31m"[0m[31maction_dispatch.configure[1;31m"[0m[31m[0m,
+                   @options[32m=[0m{[33m:group[0m=>[33m:default[0m}[32m>[0m][32m>[0m,
+               [32m#<ActiveModel::Railtie:0x00000002dcb020[0m
+                @config[32m=[0m[32m#<Rails::Railtie::Configuration:0x00000002dcafd0[0m[32m>[0m,
+                @initializers[32m=[0m
+                 [[32m#<Rails::Initializable::Initializer:0x00000004157c88[0m
+                   @block[32m=[0m[32m#<Proc:0x00000002dcaf58@/home/cis455/.rvm/gems/ruby-2.2.2/gems/activemodel-5.0.0/lib/active_model/railtie.rb:8>[0m,
+                   @context[32m=[0m[32m#<ActiveModel::Railtie:0x00000002dcb020[0m ...[32m>[0m,
+                   @name[32m=[0m[31m[1;31m"[0m[31mactive_model.secure_password[1;31m"[0m[31m[0m,
+                   @options[32m=[0m{[33m:group[0m=>[33m:default[0m}[32m>[0m][32m>[0m,
+               [32m#<ActionView::Railtie:0x00000003e1d9f0[0m
+                @config[32m=[0m[32m#<Rails::Railtie::Configuration:0x00000003e1d9a0[0m[32m>[0m,
+                @initializers[32m=[0m
+                 [[32m#<Rails::Initializable::Initializer:0x000000041577b0[0m
+                   @block[32m=[0m[32m#<Proc:0x00000003e1d540@/home/cis455/.rvm/gems/ruby-2.2.2/gems/actionview-5.0.0/lib/action_view/railtie.rb:13>[0m,
+                   @context[32m=[0m[32m#<ActionView::Railtie:0x00000003e1d9f0[0m ...[32m>[0m,
+                   @name[32m=[0m[31m[1;31m"[0m[31maction_view.embed_authenticity_token_in_remote_forms[1;31m"[0m[31m[0m,
+                   @options[32m=[0m{[33m:group[0m=>[33m:default[0m}[32m>[0m,
+                  [32m#<Rails::Initializable::Initializer:0x00000004157760[0m
+                   @block[32m=[0m[32m#<Proc:0x00000003e1d450@/home/cis455/.rvm/gems/ruby-2.2.2/gems/actionview-5.0.0/lib/action_view/railtie.rb:20>[0m,
+                   @context[32m=[0m[32m#<ActionView::Railtie:0x00000003e1d9f0[0m ...[32m>[0m,
+                   @name[32m=[0m[31m[1;31m"[0m[31maction_view.logger[1;31m"[0m[31m[0m,
+                   @options[32m=[0m{[33m:after[0m=>

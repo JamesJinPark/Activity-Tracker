@@ -7,7 +7,7 @@
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>
   </div>
-
+<%if patient_signed_in? %>
   <div class="field">
     <%= f.label :dob %><br />
     <%= f.text_field :dob, autofocus: true %>
@@ -18,6 +18,7 @@
     <%= f.text_field :mrn, autofocus: true %>
   </div>
 
+<% end %>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
