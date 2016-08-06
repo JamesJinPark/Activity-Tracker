@@ -1,0 +1,11 @@
+<div class="contents row">
+	<p> Hello ! <%= @current_user.email %><br>
+		This is your name -> <%= @current_user.name %><br>
+		This is your DOB -> <%= @current_user.dob %><br>
+		This is your MRN -> <%= @current_user.mrn %>
+	</p>
+
+	<%= link_to 'Edit', edit_patient_registration_path(@current_user)%>
+	<%= link_to 'Log out', destroy_patient_session_path, :method => :delete %>
+
+</div>
