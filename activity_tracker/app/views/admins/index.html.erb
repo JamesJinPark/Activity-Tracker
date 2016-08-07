@@ -1,7 +1,7 @@
 <div class="contents row">
 	<h2>Admin Dashboard</h2>
-	<p> Hello ! <%= @current_user.email %><br>
-		This is your name -> <%= @current_user.name %><br>
+	<p>Hello <%= @current_user.name %>!<br>
+		This is your email -> <%= @current_user.email %><br>
 	</p>
 
 	<%= link_to 'Edit', edit_admin_registration_path(@current_user)%>

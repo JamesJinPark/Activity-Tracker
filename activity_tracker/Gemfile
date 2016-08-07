@@ -41,6 +41,16 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+
+  # Use cucumber to do behavior driven testing
+  gem 'cucumber-rails', :require => false
+  # some pre-fabbed step definitions
+  gem 'cucumber-rails-training-wheels'
+  #to clear Cucumber's test database between runs
+  gem 'database_cleaner'
+  #lets Cucumber pretned to be a web browser
+  gem 'capybara'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 end

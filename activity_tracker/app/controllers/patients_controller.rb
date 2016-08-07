@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-	before_filter :authenticate_patient!
+	before_action :authenticate_patient!
 
 	# GET /patients/1
 	def show
