@@ -3,7 +3,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def after_sign_in_path_for(resource)
-    if patient_signed_in?
+    if admin_signed_in? and patient_signed_in?
+      if @route == "patients"
+        sign_out @admin
+        patient_path(resource)
+      elsif @route == "admins"    
+        sign_out @patient
+        admins_path(resource)
+      else
+        root_path        
+      end
+    elsif patient_signed_in? 
       patient_path(resource)
     elsif admin_signed_in? 
       admins_path(resource)

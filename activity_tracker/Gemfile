@@ -66,3 +66,9 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Withings gem for Ruby.  Used for registering users with Activity Tracker
+gem 'withings-api'
+
+# Withings gem for Ruby.  Used for getting user data from Withings servers
+gem 'simplificator-withings'

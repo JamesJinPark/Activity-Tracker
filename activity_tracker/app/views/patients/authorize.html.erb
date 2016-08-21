@@ -1,0 +1,13 @@
+<div class="contents row">
+	<h2>Register your Account with Mobile Apps!</h2>
+	<p>Hello <%= @current_user.name %>!<br>
+		This is your medical number -> <%= @current_user.mrn %><br>
+
+		<%= link_to 'Register your Withings Account with Activity Tracker',@authorization_url %>
+
+
+	</p>
+
+<%= link_to 'Log out', destroy_patient_session_path, :method => :delete %>
+
+</div>

@@ -3,7 +3,21 @@
 	<p>Hello <%= @current_user.name %>!<br>
 		This is your email -> <%= @current_user.name %><br>
 		This is your DOB -> <%= @current_user.dob %><br>
-		This is your MRN -> <%= @current_user.mrn %>
+		This is your MRN -> <%= @current_user.mrn %><br>
+
+		This is your token key -> <%= @current_user.withings_token_key %><br>
+		This is your token secret -> <%= @current_user.withings_token_secret %><br>
+		This is your user id -> <%= @current_user.withings_id %><br>
+<br>
+<br>
+		This is your daily activity: <br>
+
+
+		<%= link_to 'See your activity', activity_path %><br>
+
+
+
+		<%= link_to 'Register your account with mobile apps', authorize_path %>
 	</p>
 
 	<%= link_to 'Edit', edit_patient_registration_path(@current_user)%>
