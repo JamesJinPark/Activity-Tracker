@@ -1,1 +1,50 @@
-<%= @body %>
+
+<div style="text-align: center">
+<h1><%= @current_user.name %>'s Withings Activity from <%= @startdateymd %> to <%= @enddateymd %>.</h1></br>
+	<%= form_tag activity_path(@current_user), :method => :get do %>
+	  <p> Please enter start and end dates for Withings Activity:
+	    <%= text_field_tag :startdateymd, params[:startdateymd], placeholder: "Start: YYYY-MM-DD" %>
+	    <%= text_field_tag :enddateymd, params[:enddateymd], placeholder: "End: YYYY-MM-DD" %>
+	    <%= submit_tag "Submit" %>
+	  </p>
+	<% end %> 
+	<br>
+	<br>
+
+	  <table id="activity_table" align="center">
+	    <thead>
+	      <tr>
+	        <th scope="col">Date</th>
+	        <th scope="col">Steps</th>
+	        <th scope="col">Distance</th>
+	        <th scope="col">Calories</th>
+	        <th scope="col">Total Calories</th>
+	        <th scope="col">Elevation</th>
+	        <th scope="col">Soft</th>
+	        <th scope="col">Moderate</th>
+	        <th scope="col">Intense</th>
+	        <th scope="col">Timezone</th>
+	      </tr>
+	    </thead>
+
+	    <tbody>
+	      <% @body.each do |data| %>
+	        <tr>
+	          <th scope="row" class="spec"><%= data["date"] %></td>
+	          <td class="col-md-1"><%= data["steps"]%></td>
+	          <td class="col-md-1"><%= data["distance"] %></td>
+	          <td class="col-md-1"><%= data["calories"] %></td>
+	          <td class="col-md-1"><%= data["totalcalories"] %></td>
+	          <td class="col-md-1"><%= data["elevation"] %></td>
+	          <td class="col-md-1"><%= data["soft"] %></td>
+	          <td class="col-md-1"><%= data["moderate"] %></td>
+	          <td class="col-md-1"><%= data["intense"] %></td>
+	          <td class="col-md-1"><%= data["timezone"] %></td>
+	        </tr>
+	      <% end %>
+	    </tbody>
+	  </table>
+
+
+
+</div>

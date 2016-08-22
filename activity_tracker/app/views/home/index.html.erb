@@ -1,23 +1,24 @@
 <div style="text-align: center">
-	<!-- title of the page -->
-	<div class="col-md-12">
-		<h1> Welcome to Activity Tracker!</h1>
-	</div>
+	<header class="header">
+		<div class="header_bar row">
+			<h1 class="grid-12"><a href="/">Activity Tracker</a></h1>
+		</div>
+	</header>
 
-	<!-- button container -->
+
 	<div class="col-md-12">
-		<h2>I am a... </h2>
+		<h1>Welcome!  I am a... </h1>
 		<div class="row">
-			<div "col-md-14">
+			<div "col-md-12">
 				<p>
 					<%= link_to "Patient", new_patient_session_path%>
 				</p>
 			</div>
-			<div "col-md-14">
+			<div "col-md-12">
 				<p>
 					<%= link_to "Administrator", new_admin_session_path %>
 				</p>
 			</div>
 		</div>
 	</div>
-</div
+</div>

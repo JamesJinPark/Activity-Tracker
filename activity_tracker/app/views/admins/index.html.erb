@@ -1,10 +1,40 @@
 <div class="contents row">
 	<h2>Admin Dashboard</h2>
-	<p>Hello <%= @current_user.name %>!<br>
-		This is your email -> <%= @current_user.email %><br>
-	</p>
+	<p>Hello <%= @current_user.name %>!  Below are the users signed up for Activity Tracker. 
+	</p><br><br>
 
-	<%= link_to 'Edit', edit_admin_registration_path(@current_user)%>
+	<table id="user_table" align="center">
+	    <thead>
+	      <tr>
+	        <th scope="col">Name</th>
+	        <th scope="col">DOB</th>
+	        <th scope="col">MRN</th>
+	        <th scope="col">Authorized Apps</th>
+	        <th scope="col"></th>
+	      </tr>
+	    </thead>
+
+	    <tbody>
+	      <% @patients.each do |patient| %>
+	        <tr>
+	          <th id="user_table" scope="row" class="spec"><%= patient.name %></td>
+	          <td id="user_table" class="col-md-1"><%= patient.dob %></td>
+	          <td id="user_table" class="col-md-1"><%= patient.mrn %></td>
+			  <td id="user_table" class="col-md-1">
+			  	<% if patient.withings_authorized %>
+			  		<%= link_to 'Withings', "/patients/" + patient.id.to_s + "/activity" %></td>
+			  	<% else %>
+			  		None
+			  	<% end %>
+			  </td>
+			  <td id="user_table" class="col-md-1"><%= link_to 'Remove Patient', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	        </tr>
+	      <% end %>
+	    </tbody>
+	  </table> </br></br>
+
+
+	<%= link_to 'Edit Admin Profile', edit_admin_registration_path(@current_user)%><br>
 	<%= link_to 'Log out', destroy_admin_session_path, :method => :delete %>
 
 </div>

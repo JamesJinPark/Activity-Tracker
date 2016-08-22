@@ -3,5 +3,7 @@ class AdminsController < ApplicationController
 
 	def index
 		@current_user = Admin.find(params[:format])
+		@patients = Patient.all
 	end
+
 end

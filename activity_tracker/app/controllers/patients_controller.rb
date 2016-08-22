@@ -1,15 +1,23 @@
+require 'json'
 require 'rubygems'
 require 'withings'
 include Withings
 include Withings::Api
 
 class PatientsController < ApplicationController
-	before_action :authenticate_patient!, except: :index
-	before_action :set_user, only: [:authorize, :show, :activity]
+
+	before_action :authenticate
+	before_action :set_user, only: [:authorize, :show, :activity, :destroy]
 
 	def index
 		redirect_to root_path
 	end
+
+	def destroy
+		@current_user.destroy
+		flash[:notice] = "Patient removed"
+   		redirect_to admins_path(current_admin)
+   	end
 
 	def authorize
 		generate_authorization_url
@@ -20,8 +28,17 @@ class PatientsController < ApplicationController
 		Withings.consumer_key = WITHINGS_OAUTH_CONSUMER_KEY 
 
 		user = User.authenticate(@current_user.withings_id, @current_user.withings_token_key, @current_user.withings_token_secret)
-		
-		@body = user.get_activities(:startdateymd => '2016-08-15', :enddateymd => '2016-08-21')
+		@startdateymd = '2016-08-15'
+		@enddateymd = Date.today.to_s
+		if params[:startdateymd].present?
+			@startdateymd = params[:startdateymd]
+      	end
+		if params[:enddateymd].present?
+			@enddateymd = params[:enddateymd]
+      	end
+
+		response = user.get_activities(:startdateymd => @startdateymd, :enddateymd => @enddateymd)
+		@body = response["activities"]
 	end
 
 	# GET /patients/1
@@ -31,8 +48,8 @@ class PatientsController < ApplicationController
 	def receive_tokens
 		if patient_signed_in? 
 			save_user_access_token
-		end			
-		redirect_to root_path
+		end
+		redirect_to ("/patients/" + current_patient.id.to_s)
 	end
 
 	private
@@ -68,6 +85,19 @@ class PatientsController < ApplicationController
 		access_token = access_token_response.access_token
 		current_patient.withings_token_key = access_token.key
 		current_patient.withings_token_secret = access_token.secret
+		current_patient.withings_authorized = true
+
+		# Remove withings request token secret as it is not used again.
+		current_patient.withings_request_token_secret = "000"
 		current_patient.save!
 	end 
+
+	def authenticate
+	    if !admin_signed_in? then
+        	authenticate_patient! except: :index
+        else 
+        	authenticate_admin!
+      	end   
+    end
+
 end

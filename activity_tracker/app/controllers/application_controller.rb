@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if admin_signed_in? and patient_signed_in?
-      if @route == "patients"
-        sign_out @admin
+      if @route == "patients" or request.path == "/patients/sign_in" or request.path == "/patients"
+        sign_out current_admin
         patient_path(resource)
-      elsif @route == "admins"    
-        sign_out @patient
+      elsif @route == "admins" or request.path == "/admins/sign_in"   
+        sign_out current_patient
         admins_path(resource)
       else
         root_path        

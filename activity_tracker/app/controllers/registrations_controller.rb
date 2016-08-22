@@ -6,6 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
+    flash[:notice] = "Successfully updated your profile"
   	if patient_signed_in?
       patient_path(resource)
     elsif admin_signed_in? 

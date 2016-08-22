@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 	resources :admins
 
 	root 'home#index'
-
 	get "home" 						=>	"home/index"
 	get "receive_tokens"			=> 	"patients#receive_tokens"
 	get "patients/:id"	 			=> 	"patients#show"

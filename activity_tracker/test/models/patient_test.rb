@@ -18,11 +18,11 @@
 #  name                          :string
 #  dob                           :string
 #  mrn                           :integer
-#  token_secret                  :string
 #  withings_token_key            :string
 #  withings_token_secret         :string
 #  withings_id                   :integer
 #  withings_request_token_secret :string
+#  withings_authorized           :boolean
 #
 
 require 'test_helper'
