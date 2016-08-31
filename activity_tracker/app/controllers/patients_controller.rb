@@ -38,7 +38,15 @@ class PatientsController < ApplicationController
       	end
 
 		response = user.get_activities(:startdateymd => @startdateymd, :enddateymd => @enddateymd)
-		@body = response["activities"]
+		@unsorted_body = response["activities"]
+		@body = @unsorted_body.sort_by{ |e| e["date"] }
+
+		@weight = user.measurement_groups(measurement_type: 1)
+
+		@height = user.measurement_groups(measurement_type: 4)
+
+		@heart_rate = user.measurement_groups(measurement_type: 11)
+
 	end
 
 	# GET /patients/1
@@ -63,8 +71,10 @@ class PatientsController < ApplicationController
 		consumer_token = ConsumerToken.new(WITHINGS_OAUTH_CONSUMER_KEY, WITHINGS_OAUTH_CONSUMER_SECRET)
 		request_token_response = Withings::Api.create_request_token(consumer_token, "http://localhost:3000/receive_tokens")
 		request_token = request_token_response.request_token
-		current_patient.withings_request_token_secret = request_token.secret
-		current_patient.save!
+
+		#save request token secret in session sdata
+		session[:request_token_secret] = request_token.secret
+
 		@authorization_url = request_token_response.authorization_url
 	end	
 
@@ -80,15 +90,14 @@ class PatientsController < ApplicationController
     def save_user_access_token
 		current_patient.withings_id = params[:userid]
 		consumer_token = ConsumerToken.new(WITHINGS_OAUTH_CONSUMER_KEY, WITHINGS_OAUTH_CONSUMER_SECRET)
-		request_token = Withings::Api::RequestToken.new(params[:oauth_token], current_patient.withings_request_token_secret)
+		request_token = Withings::Api::RequestToken.new(params[:oauth_token], session[:request_token_secret])
+
 		access_token_response = Withings::Api.create_access_token(request_token, consumer_token, current_patient.withings_id)
 		access_token = access_token_response.access_token
+
 		current_patient.withings_token_key = access_token.key
 		current_patient.withings_token_secret = access_token.secret
 		current_patient.withings_authorized = true
-
-		# Remove withings request token secret as it is not used again.
-		current_patient.withings_request_token_secret = "000"
 		current_patient.save!
 	end 
 

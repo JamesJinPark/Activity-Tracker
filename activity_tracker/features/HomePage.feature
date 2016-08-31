@@ -5,7 +5,8 @@ Feature: Activity Tracker home page exists
 
 Scenario: Home page exists
 	Given I am on the home page
-	Then I should see "Welcome to Activity Tracker!"
+	Then I should see "Activity Tracker"
+	Then I should see "Welcome! I am a..."
 	Then I should see "Patient"
 	Then I should see "Administrator"
 

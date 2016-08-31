@@ -72,3 +72,8 @@ gem 'withings-api'
 
 # Withings gem for Ruby.  Used for getting user data from Withings servers
 gem 'simplificator-withings'
+
+#gems for style sheets
+group :assets do 
+  gem 'compass-rails'
+end
