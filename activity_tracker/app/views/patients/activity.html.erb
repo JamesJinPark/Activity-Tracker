@@ -88,7 +88,8 @@ This is height:
 	      <% date = DateTime.civil(date_parts[2], date_parts[1], date_parts[0], date_parts[3], date_parts[4], date_parts[5], 0).to_s(:db) %>
 	        <tr>
 	          <th scope="row" class="spec"><%= date%></td>
-	          <td class="col-md-1"><%= (data.to_s.split(',').third.split(': ')[1].to_f * 3.28084).round(3) %> feet </td>
+	          	<% raw_weight = (data.to_s.split(',').third.split(': ')[1].to_f * 3.28084).round(3) %>
+	          <td class="col-md-1"><%= raw_weight.to_s.split(".")[0] %> feet <%= (("0." + raw_weight.to_s.split(".")[1].to_s).to_f * 12.0).round(1).to_i %> inches </td>
 	        </tr>
 	      <% end %>
 	    </tbody>

@@ -11,6 +11,10 @@ body,html {
   background-color: $lightGray;
 }
 
+header {
+  padding-top: 20px;  
+}
+
 body {
   padding-top: 60px;
   padding-bottom: 70px;

@@ -6,7 +6,11 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-  
+  <header class="header" align="center" margin="60">
+    <div class="header_bar row">
+      <h1 class="grid-12"><a href="/">Activity Tracker</a></h1>
+    </div>
+  </header>  
   <body>
 	  <% if flash[:notice] %>
     	<div class="notice" align="center" style="color:green"><%= flash[:notice] %></div>
