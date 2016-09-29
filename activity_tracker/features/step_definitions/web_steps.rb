@@ -85,15 +85,6 @@ Given(/^I need a test patient$/) do
   Patient.create([{name: "test_name", password: '1234567890', email: "test@activitytracker.com", dob: "test_dob", mrn: "1234567890"}])
 end
 
-When /^I confirm popup$/ do
-  page.evaluate_script('window.confirm = function() { return true; }')
-  page.click('OK')
-end
-
-When /^I dismiss popup$/ do
-  page.driver.browser.switch_to.alert.dismiss
-end
-
 When /^(?:|I )fill in the following:$/ do |fields|
   fields.rows_hash.each do |name, value|
     When %{I fill in "#{name}" with "#{value}"}

@@ -22,7 +22,7 @@
 	          <td id="user_table" class="col-md-1"><%= patient.mrn %></td>
 			  <td id="user_table" class="col-md-1">
 			  	<% if patient.withings_authorized %>
-			  		<%= link_to 'Withings', "/patients/" + patient.id.to_s + "/activity" %></td>
+			  		<%= link_to 'Withings', "/patients/" + patient.id.to_s + "/withings_activity" %></td>
 			  	<% else %>
 			  		None
 			  	<% end %>

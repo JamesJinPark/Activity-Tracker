@@ -18,7 +18,7 @@
         <th id="individual_patient"><%= "Authorized Apps" %></th>
         <td>
           <% if @current_user.withings_authorized then %>
-            <%= link_to 'Withings', activity_path %><br>
+            <%= link_to 'Withings', withings_activity_path %><br>
           <% else %>
             None
           <% end %>

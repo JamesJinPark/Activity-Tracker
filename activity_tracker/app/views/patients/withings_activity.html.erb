@@ -1,0 +1,144 @@
+<div style="text-align: center">
+<h1><%= @current_user.name %>'s Withings Activity from <%= @startdateymd %> to <%= @enddateymd %>.</h1></br>
+	<%= form_tag withings_activity_path(@current_user), :method => :get do %>
+	  <p> Please enter start and end dates for Withings Activity:
+	    <%= text_field_tag :startdateymd, params[:startdateymd], placeholder: "Start: YYYY-MM-DD" %>
+	    <%= text_field_tag :enddateymd, params[:enddateymd], placeholder: "End: YYYY-MM-DD" %>
+	    <%= submit_tag "Submit" %>
+	  </p>
+	  <br>
+	  	<%= button_to "Refresh tables", withings_activity_path, params:{:startdateymd => @startdateymd, :enddateymd => @enddateymd}, method: :get%>
+	<% end %> 
+	<br>
+
+	  <table id="activity_table" align="center">
+	    <thead>
+	      <tr>
+	        <th scope="col">Date</th>
+	        <th scope="col">Steps</th>
+	        <th scope="col">Distance</th>
+	        <th scope="col">Calories</th>
+	        <th scope="col">Total Calories</th>
+	        <th scope="col">Elevation</th>
+	        <th scope="col">Soft</th>
+	        <th scope="col">Moderate</th>
+	        <th scope="col">Intense</th>
+	        <th scope="col">Timezone</th>
+	      </tr>
+	    </thead>
+
+	    <tbody>
+	      <% @body.each do |data| %>
+	        <tr>
+	          <th scope="row" class="spec"><%= data["date"] %></td>
+	          <td class="col-md-1"><%= data["steps"]%></td>
+	          <td class="col-md-1"><%= data["distance"] %></td>
+	          <td class="col-md-1"><%= data["calories"] %></td>
+	          <td class="col-md-1"><%= data["totalcalories"] %></td>
+	          <td class="col-md-1"><%= data["elevation"] %></td>
+	          <td class="col-md-1"><%= data["soft"] %></td>
+	          <td class="col-md-1"><%= data["moderate"] %></td>
+	          <td class="col-md-1"><%= data["intense"] %></td>
+	          <td class="col-md-1"><%= data["timezone"] %></td>
+	        </tr>
+	      <% end %>
+	    </tbody>
+	  </table>
+<br>
+<br>
+
+<table id="activity_table" align="center">
+	<thead>
+		<tr>
+			<th scope="col">Weight</th>
+			<th scope="col">Height</th>
+			<th scope="col">Heart Rate</th>
+		</tr>
+
+	</thead>
+	    <tbody>
+	    	<tr>
+	    		<th>
+	    			  <table id="activity_table">
+					    <thead>
+					      <tr>
+					        <th scope="col">Date</th>
+					        <th scope="col">Weight</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					      <% @weight.each do |data| %>
+					      <% date_parts = data.to_s.split(',').last.split("taken at: ").last.chomp(")]").split(/[\s.:]+/).map(&:to_i) %>
+					      <% date = DateTime.civil(date_parts[2], date_parts[1], date_parts[0], date_parts[3], date_parts[4], date_parts[5], 0).to_s(:db) %>
+					        <tr>
+					          <td scope="row" class="spec"><%= date %></td>
+					          <td class="col-md-1">
+					          <span style="font-weight:normal">
+					          	<%= (data.to_s.split(',').first.split(': ')[1].to_f * 2.20462).round(3) %> pounds
+							  </span>
+					          </td>
+					        </tr>
+					      <% end %>
+					    </tbody>
+					  </table>
+				</th>
+	    		<th valign="top">
+	    		  <table id="activity_table">
+				    <thead>
+				      <tr>
+				        <th scope="col">Date</th>
+				        <th scope="col">Height</th>
+				      </tr>
+				    </thead>
+
+				    <tbody>
+				      <% @height.each do |data| %>
+				      <% date_parts = data.to_s.split(',').last.split("taken at: ").last.chomp(")]").split(/[\s.:]+/).map(&:to_i) %>
+				      <% date = DateTime.civil(date_parts[2], date_parts[1], date_parts[0], date_parts[3], date_parts[4], date_parts[5], 0).to_s(:db) %>
+				        <tr>
+				          <td scope="row" class="spec"><%= date%></td>
+				          	<% raw_weight = (data.to_s.split(',').third.split(': ')[1].to_f * 3.28084).round(3) %>
+				          <td class="col-md-1">
+							<span style="font-weight:normal">
+				          	  <%= raw_weight.to_s.split(".")[0] %> feet <%= (("0." + raw_weight.to_s.split(".")[1].to_s).to_f * 12.0).round(1).to_i %> inches 
+				          	</span>
+				          </td>
+				        </tr>
+				      <% end %>
+				    </tbody>
+				  </table>
+				 </th>
+	    		<th valign="top">
+	    		  <table id="activity_table">
+				    <thead>
+				      <tr>
+				        <th scope="col">Date</th>
+				        <th scope="col">Heart Rate</th>
+				      </tr>
+				    </thead>
+
+				    <tbody>
+				      <% @heart_rate.each do |data| %>
+				      <% date_parts = data.to_s.split(',').last.split("taken at: ").last.chomp(")]").split(/[\s.:]+/).map(&:to_i) %>
+				      <% date = DateTime.civil(date_parts[2], date_parts[1], date_parts[0], date_parts[3], date_parts[4], date_parts[5], 0).to_s(:db) %>
+				        <tr>
+				          <td scope="row" class="spec"><%= date %></td>
+				          <td class="col-md-1">
+							<span style="font-weight:normal">
+				          	  <%= data.to_s.split(',')[5].split(': ')[1][/\d+/] %> bpm 
+	  			            </span>
+				          </td>
+				        </tr>
+				      <% end %>
+				    </tbody>
+				  </table>
+	    		</th>
+	    	</tr>
+	    </tbody>
+
+
+
+</table>
+
+</div>
+
