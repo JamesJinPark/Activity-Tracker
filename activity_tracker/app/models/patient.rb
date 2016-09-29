@@ -23,6 +23,10 @@
 #  withings_id                   :integer
 #  withings_request_token_secret :string
 #  withings_authorized           :boolean
+#  moves_id                      :string
+#  moves_authorized              :boolean
+#  moves_access_token            :string
+#  moves_refresh_token           :string
 #
 
 class Patient < ApplicationRecord

@@ -1,16 +1,24 @@
 require 'json'
 require 'rubygems'
 require 'withings'
+require 'uri'
+require 'net/http'
+require 'net/https'
+
 include Withings
 include Withings::Api
 
 class PatientsController < ApplicationController
 
 	before_action :authenticate
-	before_action :set_user, only: [:authorize, :show, :withings_activity, :destroy]
+	before_action :set_user, only: [:authorize, :show, :withings_activity, :moves_activity ,:destroy]
 
 	def index
 		redirect_to root_path
+	end
+
+	# GET /patients/1
+	def show
 	end
 
 	def destroy
@@ -21,6 +29,7 @@ class PatientsController < ApplicationController
 
 	def authorize
 		withings_generate_authorization_url
+		moves_generate_authorization_url
 	end
 
 	def withings_activity
@@ -28,7 +37,7 @@ class PatientsController < ApplicationController
 		Withings.consumer_key = WITHINGS_OAUTH_CONSUMER_KEY 
 
 		user = User.authenticate(@current_user.withings_id, @current_user.withings_token_key, @current_user.withings_token_secret)
-#		@startdateymd = '2016-08-15'
+	   #@startdateymd = '2016-08-15'
 		@startdateymd = Date.today.year.to_s + '-' + Date.today.to_s.split('-')[1] + '-' + '01'
 		@enddateymd = Date.today.to_s
 		if params[:startdateymd].present?
@@ -45,12 +54,47 @@ class PatientsController < ApplicationController
 		@weight = user.measurement_groups(measurement_type: 1)
 		@height = user.measurement_groups(measurement_type: 4)
 		@heart_rate = user.measurement_groups(measurement_type: 11)
-
 	end
 
-	# GET /patients/1
-	def show
+	def moves_activity
+		@startdateymd = "20160920"
+		@enddateymd = "20160928"
+
+		if params[:startdateymd].present?
+			@startdateymd = params[:startdateymd]
+      	end
+		if params[:enddateymd].present?
+			@enddateymd = params[:enddateymd]
+      	end
+
+		uri = URI.parse("https://api.moves-app.com/api/1.1/user/summary/daily?from=" + @startdateymd + 
+			"&to=" + @enddateymd + "&access_token=" + @current_user.moves_access_token)
+		http = Net::HTTP.new(uri.host, uri.port)
+		http.use_ssl = true
+		request = Net::HTTP::Get.new(uri.request_uri)
+		response = http.request(request)
+
+		@body = response.body
+		@parsed_data = JSON.parse(@body)
+	end 
+
+
+	# Receives authorization code from Moves after user authorizes Activity Tracker 
+	def moves_receive_auth_code
+		if patient_signed_in? 
+			moves_save_user_access_token(params[:code])
+		end
+		redirect_to ("/patients/" + current_patient.id.to_s)
 	end
+
+
+	def withings_receive_tokens
+		if patient_signed_in? 
+			withings_save_user_access_token
+		end
+		redirect_to ("/patients/" + current_patient.id.to_s)
+	end
+
 
 	private
 
@@ -84,15 +128,9 @@ class PatientsController < ApplicationController
 		#save request token secret in session data
 		session[:request_token_secret] = request_token.secret
 
+# 		This is currently not working!
 		@withings_authorization_url = request_token_response.authorization_url
 	end	
-
-	def withings_receive_tokens
-		if patient_signed_in? 
-			withings_save_user_access_token
-		end
-		redirect_to ("/patients/" + current_patient.id.to_s)
-	end
 
 
     # Receives user id from Withings as well as authenticates request token to create access token
@@ -115,7 +153,36 @@ class PatientsController < ApplicationController
 
 	############################## MOVES ##############################
 
-    def moves_save_user_access_token
+	MOVES_CLIENT_ID = "WESAJw6iCmrUn2vj4vy9lcYgOPd22www"
+	MOVES_CLIENT_SECRET = "1G3S3K236hn4cxQa24Dx1a9Jq9KInU9DKpUR84hEECdWC1iSNAw02DkQTJ72R03A"
+
+	def moves_generate_authorization_url
+		@moves_authorization_url = "https://api.moves-app.com/oauth/v1/authorize?response_type=code&client_id=" + 
+		MOVES_CLIENT_ID + "&scope=activity"
+	end
+
+
+	# Uses authorization code to make a POST request and receive access token
+    def moves_save_user_access_token(code)
+
+    	# Make a POST request to get user access token from Moves
+    	uri = URI.parse("https://api.moves-app.com")
+
+    	http = Net::HTTP.new(uri.host, uri.port)
+    	http.use_ssl = true
+    	http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    	request = Net::HTTP::Post.new("https://api.moves-app.com/oauth/v1/access_token?grant_type=authorization_code&code=" +
+    		code + "&client_id=" + MOVES_CLIENT_ID + "&client_secret=" + MOVES_CLIENT_SECRET)
+
+    	response = http.request(request)
+    	body = response.body
+
+		current_patient.moves_id = JSON.parse(body)["user_id"]
+		current_patient.moves_access_token = JSON.parse(body)["access_token"]
+		current_patient.moves_refresh_token = JSON.parse(body)["refresh_token"]
+		current_patient.moves_authorized = true
+		current_patient.save!
 	end 
 
 

@@ -17,8 +17,13 @@
       <tr>
         <th id="individual_patient"><%= "Authorized Apps" %></th>
         <td>
-          <% if @current_user.withings_authorized then %>
+          <% if @current_user.withings_authorized and @current_user.moves_authorized then %>
             <%= link_to 'Withings', withings_activity_path %><br>
+            <%= link_to 'Moves', moves_activity_path %><br>
+          <% elsif @current_user.withings_authorized then %>
+            <%= link_to 'Withings', withings_activity_path %><br>
+          <% elsif @current_user.moves_authorized then %>
+            <%= link_to 'Moves', moves_activity_path %><br>
           <% else %>
             None
           <% end %>
