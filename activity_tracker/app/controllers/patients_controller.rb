@@ -116,7 +116,7 @@ class PatientsController < ApplicationController
     ############################## WITHINGS ##############################
 
 	WITHINGS_OAUTH_CONSUMER_KEY = "491fb39099b073d1170ebd8ce128497d7e2860e5efb7d1e9719fbc62f162e"
-	WITHINGS_OAUTH_CONSUMER_SECRET = "9c5ff033f4f1b307f6e08977ee351242d8721f7b4ebd48c83fd0ed1d6b4d4c"
+	WITHINGS_OAUTH_CONSUMER_SECRET = "3ee48c7b35d7fe8163857f9930500d3361431de392779306df3d41bd662c8"
 	
 	# Creates a request token and URL that users can follow to allow Activity Tracker to access their data
 	# Saves secret for request token's key to be used when creating access token	
@@ -128,7 +128,6 @@ class PatientsController < ApplicationController
 		#save request token secret in session data
 		session[:request_token_secret] = request_token.secret
 
-# 		This is currently not working!
 		@withings_authorization_url = request_token_response.authorization_url
 	end	
 

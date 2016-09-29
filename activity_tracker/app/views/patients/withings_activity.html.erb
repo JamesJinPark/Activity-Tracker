@@ -6,10 +6,12 @@
 	    <%= text_field_tag :enddateymd, params[:enddateymd], placeholder: "End: YYYY-MM-DD" %>
 	    <%= submit_tag "Submit" %>
 	  </p>
-	  <br>
-	  	<%= button_to "Refresh tables", withings_activity_path, params:{:startdateymd => @startdateymd, :enddateymd => @enddateymd}, method: :get%>
 	<% end %> 
+	  <br>
+
+	  	<%= button_to "Refresh tables", withings_activity_path, params:{:startdateymd => @startdateymd, :enddateymd => @enddateymd}, method: :get%>
 	<br>
+
 
 	  <table id="activity_table" align="center">
 	    <thead>
@@ -135,8 +137,6 @@
 	    		</th>
 	    	</tr>
 	    </tbody>
-
-
 
 </table>
 

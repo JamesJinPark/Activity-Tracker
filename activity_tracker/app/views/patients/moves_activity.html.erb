@@ -6,9 +6,11 @@
 	    <%= text_field_tag :enddateymd, params[:enddateymd], placeholder: "End: YYYYMMDD" %>
 	    <%= submit_tag "Submit" %>
 	  </p>
+	<% end %> 
+
 	  <br>
 	  	<%= button_to "Refresh tables", moves_activity_path, params:{:startdateymd => @startdateymd, :enddateymd => @enddateymd}, method: :get%>
-	<% end %> 
+	  <br>
 
 	  <table id="activity_table" align="center">
 	    <thead>
