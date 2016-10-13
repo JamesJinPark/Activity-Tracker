@@ -81,34 +81,74 @@ class PatientsController < ApplicationController
 	end 
 
 	def fitbit_activity
-		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + "/profile.json")
-		http = Net::HTTP.new(uri.host, uri.port)
-		http.use_ssl = true
-		header_body = "Bearer " + @current_user.fitbit_access_token
-		request = Net::HTTP::Get.new(uri.request_uri, 
-			initheader = {"Authorization" => header_body})
 
-		response = http.request(request)
+		def get_json(uri)
+			http = Net::HTTP.new(uri.host, uri.port)
+			http.use_ssl = true
+			header_body = "Bearer " + @current_user.fitbit_access_token
+			request = Net::HTTP::Get.new(uri.request_uri, 
+				initheader = {"Authorization" => header_body})
+
+			response = http.request(request)
+			if response.code != '200'
+				puts 'bad status code'
+				puts response.code
+				return false
+			end
+			return response
+		end
+
+		@startdateymd = "2016-09-01"
+		@enddateymd = "2016-10-01"
+
+		if params[:startdateymd].present?
+			@startdateymd = params[:startdateymd]
+      	end
+		if params[:enddateymd].present?
+			@enddateymd = params[:enddateymd]
+      	end
+
+		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + "/profile.json")
+		response = get_json(uri)
 
 		@user_body = response.body
 		@parsed_user_data = JSON.parse(@user_body)
 		
-		@startdateymd = "2016-09-01"
-		@enddateymd = "2016-10-01"
-
+		# Get steps
 		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
 			"/activities/steps/date/"+ @startdateymd + "/" + @enddateymd +".json")
 
-		http = Net::HTTP.new(uri.host, uri.port)
-		http.use_ssl = true
-		header_body = "Bearer " + @current_user.fitbit_access_token
-		request = Net::HTTP::Get.new(uri.request_uri, 
-			initheader = {"Authorization" => header_body})
+		response = get_json(uri)
 
-		response = http.request(request)
+		@step_body = response.body
+		@parsed_step_data = JSON.parse(@step_body)
+		
+		# Get distance 
+		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
+			"/activities/distance/date/"+ @startdateymd + "/" + @enddateymd +".json")
 
-		@body = response.body
-		@parsed_data = JSON.parse(@body)
+		response = get_json(uri)
+
+		@distance_body = response.body
+		@parsed_distance_data = JSON.parse(@distance_body)
+
+		# Get calories
+		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
+			"/activities/calories/date/"+ @startdateymd + "/" + @enddateymd +".json")
+
+		response = get_json(uri)
+
+		@calories_body = response.body
+		@parsed_calories_data = JSON.parse(@calories_body)
+
+		# Get heart
+		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
+			"/activities/heart/date/"+ @startdateymd + "/" + @enddateymd +".json")
+
+		response = get_json(uri)
+
+		@heart_body = response.body
+		@parsed_heart_data = JSON.parse(@heart_body)
 
 	end
 

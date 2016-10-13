@@ -1,14 +1,156 @@
 <div style="text-align: center">
-<h1><%= @current_user.name %>'s Fitbit Activity</h1></br>
 
-	<%= @parsed_user_data["user"]["age"]%> years old <br>
-	<%= ((@parsed_user_data["user"]["height"].to_f * 0.393701) / 12).to_s.split('.').first.to_i%> feet 
-	<%= (('0.' + (@parsed_user_data["user"]["height"].to_f * 0.393701 / 12).to_s.split('.').second).to_f * 12).to_i%> inches <br>
-	<%= @parsed_user_data["user"]["weight"].to_f * 2.20462%> lbs<br>
+<h1><%= @current_user.name %>'s Fitbit Activity from <%= @startdateymd %> to <%= @enddateymd %>.</h1></br>
 
-	STUFF1
+	<%= form_tag fitbit_activity_path(@current_user), :method => :get do %>
 
-	<%= @parsed_data%> 
+	  <p> Please enter start and end dates for Fitbit Activity:
+	    <%= text_field_tag :startdateymd, params[:startdateymd], placeholder: "Start: YYYY-MM-DD" %>
+	    <%= text_field_tag :enddateymd, params[:enddateymd], placeholder: "End: YYYY-MM-DD" %>
+	    <%= submit_tag "Submit" %>
+	  </p>
+	<% end %> 
+	  <br>
+	  	<%= button_to "Refresh tables", fitbit_activity_path, params:{:startdateymd => @startdateymd, :enddateymd => @enddateymd}, method: :get%>
+	  <br>
+
+  <table id="activity_table" align="center">
+	<thead>
+		<tr>
+			<th scope="col">Weight</th>
+			<th scope="col">Height</th>
+			<th scope="col">Age</th>
+		</tr>
+
+	</thead>
+    <tbody>
+    	<tr>
+    		<td class="col-md-1">
+			  <span style="font-weight:normal">
+			    <%= @parsed_user_data["user"]["weight"].to_f * 2.20462%> lbs
+			  </span>
+			</td>
+    		<td class="col-md-1">
+			  <span style="font-weight:normal">
+			  	<%= ((@parsed_user_data["user"]["height"].to_f * 0.393701) / 12).to_s.split('.').first.to_i%> feet 
+			  	<%= (('0.' + (@parsed_user_data["user"]["height"].to_f * 0.393701 / 12).to_s.split('.').second).to_f * 12).to_i%> inches 
+			  </span>
+			</td>
+    		<td class="col-md-1">
+			  <span style="font-weight:normal">
+				<%= @parsed_user_data["user"]["age"]%> years old 
+			  </span>
+			</td>
+		</tr>
+    </tbody>
+  </table>
+  <br>
+
+<table id="activity_table" align="center">
+	<thead>
+	  <tr>
+	    <th scope="col">Date</th>
+	    <th scope="col">Steps</th>
+	    <th scope="col">Distance</th>
+	    <th scope="col">Calories</th>
+	  </tr>
+	</thead>
+	<tbody>
+	
+	<tr>
+	<td>
+
+	<table id="activity_table" align="center">
+	<thead>
+	</thead>
+	<tbody>
+	  <% @parsed_step_data["activities-steps"].each do |data| %>
+	    <tr>
+	      <td scope="row" class="spec"><%= data["dateTime"] %></td>
+	    </tr>
+	  <% end %>
+	</tbody>
+	</table>
+	</td>
+
+	<td>
+
+	<table id="activity_table" align="center">
+	<thead>
+	</thead>
+
+	<tbody>
+	  <% @parsed_step_data["activities-steps"].each do |data| %>
+	    <tr>
+	      <td class="col-md-1"><%= data["value"]%></td>
+	    </tr>
+	  <% end %>
+	</tbody>
+	</table>
+
+	</td>
+
+	<td>
+	
+	<table id="activity_table" align="center">
+	<thead>
+	</thead>
+
+	<tbody>
+	  <% @parsed_distance_data["activities-distance"].each do |data| %>
+	    <tr>
+	      <td class="col-md-1"><%= data["value"]%></td>
+	    </tr>
+	  <% end %>
+	</tbody>
+	</table>
+
+	</td>
+
+	<td>
+
+	<table id="activity_table" align="center">
+	<thead>
+	</thead>
+
+	<tbody>
+	  <% @parsed_calories_data["activities-calories"].each do |data| %>
+	    <tr>
+	      <td class="col-md-1"><%= data["value"]%></td>
+	    </tr>
+	  <% end %>
+	</tbody>
+	</table>
+
+	</td>
+
+</tbody>
+</table>
+	
+<br><br>
+	<table id="activity_table" align="center">
+		<b>Heart rate</b><br>
+	<thead>
+	  <tr>
+	    <th scope="col">Date</th>
+	    <th scope="col">Heart rate</th>
+	  </tr>
+	</thead>
+
+	<tbody>
+	  <% @parsed_heart_data["activities-heart"].each do |data| %>
+	    <tr>
+	      <td scope="row" class="spec"><%= data["dateTime"] %></td>
+	      <td class="col-md-1" align="left">
+	      	<% data["value"]["heartRateZones"].each do |heart_rate| %>
+	      	  <%= heart_rate["name"] %>, max = <%= heart_rate["max"] %>, min = <%= heart_rate["min"] %><br>
+	      	<% end %>
+	      	<br>
+	      </td>
+	    </tr>
+	  <% end %>
+	</tbody>
+	</table>
 
 
 </div>
