@@ -11,7 +11,8 @@ include Withings::Api
 class PatientsController < ApplicationController
 
 	before_action :authenticate
-	before_action :set_user, only: [:authorize, :show, :withings_activity, :moves_activity ,:destroy]
+	before_action :set_user, only: [:authorize, :show, :withings_activity, :moves_activity, :fitbit_activity,
+		:destroy]
 
 	def index
 		redirect_to root_path
@@ -30,6 +31,7 @@ class PatientsController < ApplicationController
 	def authorize
 		withings_generate_authorization_url
 		moves_generate_authorization_url
+		fitbit_generate_authorization_url
 	end
 
 	def withings_activity
@@ -57,8 +59,8 @@ class PatientsController < ApplicationController
 	end
 
 	def moves_activity
-		@startdateymd = "20160920"
-		@enddateymd = "20160928"
+		@startdateymd = "20161001"
+		@enddateymd = "20161012"
 
 		if params[:startdateymd].present?
 			@startdateymd = params[:startdateymd]
@@ -78,6 +80,45 @@ class PatientsController < ApplicationController
 		@parsed_data = JSON.parse(@body)
 	end 
 
+	def fitbit_activity
+		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + "/profile.json")
+		http = Net::HTTP.new(uri.host, uri.port)
+		http.use_ssl = true
+		header_body = "Bearer " + @current_user.fitbit_access_token
+		request = Net::HTTP::Get.new(uri.request_uri, 
+			initheader = {"Authorization" => header_body})
+
+		response = http.request(request)
+
+		@user_body = response.body
+		@parsed_user_data = JSON.parse(@user_body)
+		
+		@startdateymd = "2016-09-01"
+		@enddateymd = "2016-10-01"
+
+		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
+			"/activities/steps/date/"+ @startdateymd + "/" + @enddateymd +".json")
+
+		http = Net::HTTP.new(uri.host, uri.port)
+		http.use_ssl = true
+		header_body = "Bearer " + @current_user.fitbit_access_token
+		request = Net::HTTP::Get.new(uri.request_uri, 
+			initheader = {"Authorization" => header_body})
+
+		response = http.request(request)
+
+		@body = response.body
+		@parsed_data = JSON.parse(@body)
+
+	end
+
+	# Receives authorization code from Fitbit after user authorizes Activity Tracker
+	def fitbit_receive_auth_code
+		if patient_signed_in? 
+			fitbit_save_user_access_token(params[:code])
+		end
+		redirect_to ("/patients/" + current_patient.id.to_s)
+	end
 
 	# Receives authorization code from Moves after user authorizes Activity Tracker 
 	def moves_receive_auth_code
@@ -86,7 +127,6 @@ class PatientsController < ApplicationController
 		end
 		redirect_to ("/patients/" + current_patient.id.to_s)
 	end
-
 
 	def withings_receive_tokens
 		if patient_signed_in? 
@@ -183,6 +223,45 @@ class PatientsController < ApplicationController
 		current_patient.moves_authorized = true
 		current_patient.save!
 	end 
+
+
+    ############################## FITBIT ##############################
+	
+	FITBIT_CLIENT_ID = "22833K"
+	FITBIT_CLIENT_SECRET = "c971cf8d0df2e469e17ec5b85e19856c"
+	
+	def fitbit_generate_authorization_url
+		@fitbit_authorization_url = "https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=" + 
+		FITBIT_CLIENT_ID + "&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ffitbit_receive_auth_code" + 
+		"&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=604800"
+	end
+
+	def fitbit_save_user_access_token(code)
+
+    	# Make a POST request to get user access token from Fitbit
+    	uri = URI.parse("https://api.fitbit.com/oauth2/token")
+
+    	http = Net::HTTP.new(uri.host, uri.port)
+    	http.use_ssl = true
+    	http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    	request = Net::HTTP::Post.new("https://api.fitbit.com/oauth2/token?grant_type=authorization_code&code=" +
+    		code + "&client_id=" + FITBIT_CLIENT_ID + 
+    		"&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ffitbit_receive_auth_code", 
+    		initheader = {"Authorization" => "Basic MjI4MzNLOmM5NzFjZjhkMGRmMmU0NjllMTdlYzViODVlMTk4NTZj", 
+    			"Content-Type" => "application/x-www-form-urlencoded"})
+
+    	response = http.request(request)
+    	body = response.body
+ 
+		current_patient.fitbit_id = JSON.parse(body)["user_id"]
+		current_patient.fitbit_access_token = JSON.parse(body)["access_token"]
+		current_patient.fitbit_refresh_token = JSON.parse(body)["refresh_token"]
+		current_patient.fitbit_authorized = true
+		current_patient.save!
+	end
+
+
 
 
 end

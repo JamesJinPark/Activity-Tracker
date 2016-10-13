@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160929134149) do
+ActiveRecord::Schema.define(version: 20161013072013) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -55,6 +55,10 @@ ActiveRecord::Schema.define(version: 20160929134149) do
     t.boolean  "moves_authorized"
     t.string   "moves_access_token"
     t.string   "moves_refresh_token"
+    t.string   "fitbit_id"
+    t.boolean  "fitbit_authorized"
+    t.string   "fitbit_access_token"
+    t.string   "fitbit_refresh_token"
     t.index ["email"], name: "index_patients_on_email", unique: true
     t.index ["reset_password_token"], name: "index_patients_on_reset_password_token", unique: true
   end

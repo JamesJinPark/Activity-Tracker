@@ -27,6 +27,10 @@
 #  moves_authorized              :boolean
 #  moves_access_token            :string
 #  moves_refresh_token           :string
+#  fitbit_id                     :string
+#  fitbit_authorized             :boolean
+#  fitbit_access_token           :string
+#  fitbit_refresh_token          :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

@@ -1,0 +1,14 @@
+<div style="text-align: center">
+<h1><%= @current_user.name %>'s Fitbit Activity</h1></br>
+
+	<%= @parsed_user_data["user"]["age"]%> years old <br>
+	<%= ((@parsed_user_data["user"]["height"].to_f * 0.393701) / 12).to_s.split('.').first.to_i%> feet 
+	<%= (('0.' + (@parsed_user_data["user"]["height"].to_f * 0.393701 / 12).to_s.split('.').second).to_f * 12).to_i%> inches <br>
+	<%= @parsed_user_data["user"]["weight"].to_f * 2.20462%> lbs<br>
+
+	STUFF1
+
+	<%= @parsed_data%> 
+
+
+</div>
