@@ -1,12 +1,25 @@
 <div style="text-align: center">
+
 <h1><%= @current_user.name %>'s Moves Activity from <%= @startdateymd %> to <%= @enddateymd %>.</h1></br>
 	<%= form_tag moves_activity_path(@current_user), :method => :get do %>
+
+		<% if @errors %>
+			<font color= "red">
+			  	<div id="error_explanation">
+					<ul>
+						<%= @errors%>
+					</ul>
+				</div>
+			</font>
+		<% end %>
+
 	  <p> Please enter start and end dates for Moves Activity:
-	    <%= text_field_tag :startdateymd, params[:startdateymd], placeholder: "Start: YYYYMMDD" %>
-	    <%= text_field_tag :enddateymd, params[:enddateymd], placeholder: "End: YYYYMMDD" %>
+	    <%= text_field_tag :startdateymd, params[:startdateymd], placeholder: "Start: YYYY-MM-DD" %>
+	    <%= text_field_tag :enddateymd, params[:enddateymd], placeholder: "End: YYYY-MM-DD" %>
 	    <%= submit_tag "Submit" %>
 	  </p>
 	<% end %> 
+
 
 	  <br>
 	  	<%= button_to "Refresh tables", moves_activity_path, params:{:startdateymd => @startdateymd, :enddateymd => @enddateymd}, method: :get%>
@@ -16,21 +29,50 @@
 	    <thead>
 	      <tr>
 	        <th scope="col">Date</th>
-	        <th scope="col">Summary</th>
+	        <th scope="col">Walking</th>
+	        <th scope="col">Running</th>
+	        <th scope="col">Total</th>
 	      </tr>
 	    </thead>
 
 	    <tbody>
-	      <% @parsed_data.each do |data| %>
+	      <% @formatted_parsed_data.each do |data| %>
 	        <tr>
 	          <th scope="row" class="spec"><%= data["date"] %></th>
 	          <td class="col-md-1" align="left">
-	            <% if not data["summary"].nil? %>
-              	  <% data["summary"].each do |activity_data|%>
-              	    <%= activity_data["activity"]%>:  <%= '%.2f' % (activity_data["distance"].to_f / 1000) %> km traveled, <%= '%.2f' % (activity_data["duration"].to_f / 60.0) %> mins active, <%= activity_data["steps"] %> steps taken
+	            <% if not data["walking"].nil? %>
+              	  <%= '%.2f' % (data["walking"]["distance"].to_f / 1000 * 0.621371) %> miles traveled
+                 	<br>
+              	  <%= '%.2f' % (data["walking"]["duration"].to_f / 60.0) %> mins active
               	    <br>
-              	  <% end %>
+              	  <%= data["walking"]["steps"]%> steps taken 
+              	    <br>
 	          	<% end %>
+	      		<br>
+	          </td>
+
+	          <td class="col-md-1" align="left">
+	      		<% if not data["running"].nil? %>
+              	  <%= '%.2f' % (data["running"]["distance"].to_f / 1000 * 0.621371) %> miles traveled
+                 	<br>
+              	  <%= '%.2f' % (data["running"]["duration"].to_f / 60.0) %> mins active
+              	    <br>
+              	  <%= data["running"]["steps"]%> steps taken
+              	    <br>
+	          	<% end %>
+	      		<br>
+	          </td>
+
+	          <td class="col-md-1" align="left">
+	      		<% if not data["total"].nil? %>
+              	  <%= '%.2f' % (data["total"]["total_distance"].to_f / 1000 * 0.621371)  %> miles traveled
+                 	<br>
+              	  <%= '%.2f' % (data["total"]["total_duration"].to_f / 60.0) %> mins active
+              	    <br>
+              	  <%= data["total"]["total_steps"]%> steps taken
+              	    <br>
+	          	<% end %>
+	      		<br>
 	          </td>
 	        </tr>
 	      <% end %>

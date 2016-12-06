@@ -8,7 +8,7 @@ require 'net/https'
 include Withings
 include Withings::Api
 
-class PatientsController < ApplicationController
+class PatientsController < ApplicationController 
 
 	before_action :authenticate
 	before_action :set_user, only: [:authorize, :show, :withings_activity, :moves_activity, :fitbit_activity,
@@ -39,7 +39,7 @@ class PatientsController < ApplicationController
 		Withings.consumer_key = WITHINGS_OAUTH_CONSUMER_KEY 
 
 		user = User.authenticate(@current_user.withings_id, @current_user.withings_token_key, @current_user.withings_token_secret)
-	   #@startdateymd = '2016-08-15'
+		
 		@startdateymd = Date.today.year.to_s + '-' + Date.today.to_s.split('-')[1] + '-' + '01'
 		@enddateymd = Date.today.to_s
 		if params[:startdateymd].present?
@@ -59,15 +59,89 @@ class PatientsController < ApplicationController
 	end
 
 	def moves_activity
-		@startdateymd = "20161001"
-		@enddateymd = "20161012"
+
+		def strip_hyphens(num)
+			return num.gsub('-', '')
+		end
+
+		def add_hyphens(num)
+			return num.insert(4, '-').insert(7, '-')
+		end
+
+		def formatMovesParsedData(raw_array)
+			new_array = []
+			raw_array.each do |date_summary|
+
+				total_duration = 0
+				total_distance = 0
+				total_steps = 0
+
+				temp_hash_table = {}
+				temp_hash_table["date"] = add_hyphens(date_summary["date"])
+
+				if date_summary["summary"] != nil
+
+					temp_lst = date_summary["summary"]
+					temp_lst.each do |data|
+
+						if data["activity"] == "walking"
+							nested_temp_hash_table = {}
+						
+							nested_temp_hash_table["duration"] = data["duration"]
+							total_duration += data["duration"]
+						
+							nested_temp_hash_table["distance"] = data["distance"]
+							total_distance += data["distance"]
+						
+							nested_temp_hash_table["steps"] = data["steps"]
+							total_steps += data["steps"]
+						
+							temp_hash_table["walking"] = nested_temp_hash_table
+						end
+
+						if data["activity"] == "running"
+							nested_temp_hash_table = {}
+						
+							nested_temp_hash_table["duration"] = data["duration"]
+							total_duration += data["duration"]
+						
+							nested_temp_hash_table["distance"] = data["distance"]
+							total_distance += data["distance"]
+						
+							nested_temp_hash_table["steps"] = data["steps"]
+							total_steps += data["steps"]
+						
+							temp_hash_table["running"] = nested_temp_hash_table
+						end
+
+					temp_hash_table["total"] = {"total_duration" => total_duration, "total_distance" => total_distance, 
+						"total_steps" => total_steps}			
+					end
+
+				end
+
+				new_array << temp_hash_table
+			end
+
+			return new_array
+		end
+
+		@startdateymd = Date.today.year.to_s + Date.today.to_s.split('-')[1] + '01'
+		@enddateymd = Date.today.year.to_s + Date.today.to_s.split('-')[1] + Date.today.to_s.split('-')[2]
 
 		if params[:startdateymd].present?
-			@startdateymd = params[:startdateymd]
+			@startdateymd = strip_hyphens(params[:startdateymd])
       	end
 		if params[:enddateymd].present?
-			@enddateymd = params[:enddateymd]
+			@enddateymd = strip_hyphens(params[:enddateymd])
       	end
+
+      	if (Date.parse(@enddateymd) - Date.parse(@startdateymd)).to_i > 30
+			@startdateymd = Date.today.year.to_s + Date.today.to_s.split('-')[1] + '01'
+			@enddateymd = Date.today.year.to_s + Date.today.to_s.split('-')[1] + Date.today.to_s.split('-')[2]
+			@errors = "Error!  Date range cannot be more than 30 days."
+	  	end
+
 
 		uri = URI.parse("https://api.moves-app.com/api/1.1/user/summary/daily?from=" + @startdateymd + 
 			"&to=" + @enddateymd + "&access_token=" + @current_user.moves_access_token)
@@ -78,9 +152,74 @@ class PatientsController < ApplicationController
 
 		@body = response.body
 		@parsed_data = JSON.parse(@body)
+
+		if response.code != "200"
+			puts "Error! " + response.code
+			puts @parsed_data["error"] 
+
+			if response.code == '401'
+				puts "Access tokens expired." 
+#				renew_tokens(@current_user)
+			end
+
+			if response.code == '429' 
+				puts "Too many requests"
+			end
+
+			if response.code == '400'
+				puts "Invalid date range: max 31 of days allowed."
+			end
+
+		else
+			
+	      	@formatted_parsed_data = formatMovesParsedData(@parsed_data)
+
+		end
+		
+		@startdateymd = add_hyphens(@startdateymd)
+	    @enddateymd = add_hyphens(@enddateymd)
+
 	end 
 
 	def fitbit_activity
+
+		def renew_tokens(current_user)
+			current_patient = Patient.find(current_user.id)
+			if current_patient != current_user.id 
+				puts "Failed to find patient"
+				return false
+			end
+			puts "Found user"
+			puts current_patient
+
+   			# Make a post request to the fitbit api endpoint for refresh tokens  
+      		uri = URI.parse("https://api.fitbit.com/oauth2/token")
+
+	    	http = Net::HTTP.new(uri.host, uri.port)
+    		http.use_ssl = true
+    		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+	    	request = Net::HTTP::Post.new("https://api.fitbit.com/oauth2/token", 
+	    		initheader = {"Authorization" => "Basic MjI4MzNLOmM5NzFjZjhkMGRmMmU0NjllMTdlYzViODVlMTk4NTZj", 
+	    			"Content-Type" => "application/x-www-form-urlencoded"})
+	    	request.set_form_data({"grant_type" => "refresh_token", "refresh_token" => current_patient.fitbit_refresh_token})
+
+	    	response = http.request(request)
+	    	if response.code == '200' 
+		    	body = response.body
+
+		      	# Renew the access_token and refresh_token in the database 	 
+				current_patient.fitbit_access_token = JSON.parse(body)["access_token"]
+				current_patient.fitbit_refresh_token = JSON.parse(body)["refresh_token"]
+				current_patient.save!
+			else 
+				puts "Failed at renewing tokens"
+				puts response.code
+				return false
+			end
+
+			return true
+		end
 
 		def get_json(uri)
 			http = Net::HTTP.new(uri.host, uri.port)
@@ -90,11 +229,22 @@ class PatientsController < ApplicationController
 				initheader = {"Authorization" => header_body})
 
 			response = http.request(request)
+
+			# Check if the response is valid
 			if response.code != '200'
-				puts 'bad status code'
+				puts 'Bad status code'
 				puts response.code
-				return false
+				# If response is 401, then try to renew the tokens and try again
+				if response.code == '401'
+					# Test if renew tokens has worked
+					if renew_tokens(@current_user)
+						# Recursive call to getting a valid response again
+						get_json(uri)
+					end
+
+				end
 			end
+
 			return response
 		end
 
@@ -111,8 +261,12 @@ class PatientsController < ApplicationController
 		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + "/profile.json")
 		response = get_json(uri)
 
-		@user_body = response.body
-		@parsed_user_data = JSON.parse(@user_body)
+		if response
+			@user_body = response.body
+			@parsed_user_data = JSON.parse(@user_body)
+		else 
+
+		end
 		
 		# Get steps
 		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
@@ -154,7 +308,7 @@ class PatientsController < ApplicationController
 
 	# Receives authorization code from Fitbit after user authorizes Activity Tracker
 	def fitbit_receive_auth_code
-		if patient_signed_in? 
+		if patient_signed_in? or admin_signed_in?
 			fitbit_save_user_access_token(params[:code])
 		end
 		redirect_to ("/patients/" + current_patient.id.to_s)
@@ -162,14 +316,14 @@ class PatientsController < ApplicationController
 
 	# Receives authorization code from Moves after user authorizes Activity Tracker 
 	def moves_receive_auth_code
-		if patient_signed_in? 
+		if patient_signed_in? or admin_signed_in?
 			moves_save_user_access_token(params[:code])
 		end
 		redirect_to ("/patients/" + current_patient.id.to_s)
 	end
 
 	def withings_receive_tokens
-		if patient_signed_in? 
+		if patient_signed_in? or admin_signed_in?
 			withings_save_user_access_token
 		end
 		redirect_to ("/patients/" + current_patient.id.to_s)
@@ -302,6 +456,16 @@ class PatientsController < ApplicationController
 	end
 
 
+	def read_attribute_for_validation(attr)
+		send(attr)
+	end
 
+	def self.human_attribute_name(attr, options = {})
+		attr
+	end
+
+	def self.lookup_ancestors
+		[self]
+	end
 
 end
