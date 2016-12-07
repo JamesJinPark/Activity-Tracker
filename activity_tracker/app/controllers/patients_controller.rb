@@ -68,6 +68,65 @@ class PatientsController < ApplicationController
 			return num.insert(4, '-').insert(7, '-')
 		end
 
+		def get_moves_json(uri)
+			http = Net::HTTP.new(uri.host, uri.port)
+			http.use_ssl = true
+			request = Net::HTTP::Get.new(uri.request_uri)
+			response = http.request(request)
+
+			if response.code != "200"
+				puts "Error! " + response.code
+				puts response.body
+
+				# If response is 401, then try to renew the tokens and try again
+				if response.code == '401'
+					puts "Access tokens expired." 
+					# Test if renew tokens has worked
+					if renew_moves_tokens
+						# Recursive call to getting a valid response again
+						get_moves_json(uri)
+					else 
+						puts "Failed to renew tokens"
+					end
+				end
+
+			end
+
+			return response
+		end
+
+		def renew_moves_tokens
+
+   			# Make a post request to the Moves api endpoint for refresh tokens  
+		    uri = URI.parse("https://api.moves-app.com")
+
+	    	http = Net::HTTP.new(uri.host, uri.port)
+    		http.use_ssl = true
+    		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+			request = Net::HTTP::Post.new("/oauth/v1/access_token?" + 
+				"grant_type=refresh_token&refresh_token=" +  @current_user.moves_refresh_token + 
+				"&client_id=" + MOVES_CLIENT_ID + "&client_secret=" + MOVES_CLIENT_SECRET)
+
+	    	response = http.request(request)
+	    	if response.code == '200' 
+		    	body = response.body
+
+		      	# Renew the access_token and refresh_token in the database 	 
+				@current_user.moves_access_token = JSON.parse(body)["access_token"]
+				@current_user.moves_refresh_token = JSON.parse(body)["refresh_token"]
+				@current_user.save!
+			else 
+				puts "Failed at renewing tokens"
+				puts response.code
+				return false
+			end
+
+			return true
+		end
+
+
+		# Formats the parsed data from Moves JSON object.  Implmentation specific formatting for the Moves view. 
 		def formatMovesParsedData(raw_array)
 			new_array = []
 			raw_array.each do |date_summary|
@@ -86,36 +145,28 @@ class PatientsController < ApplicationController
 
 						if data["activity"] == "walking"
 							nested_temp_hash_table = {}
-						
 							nested_temp_hash_table["duration"] = data["duration"]
 							total_duration += data["duration"]
-						
 							nested_temp_hash_table["distance"] = data["distance"]
 							total_distance += data["distance"]
-						
 							nested_temp_hash_table["steps"] = data["steps"]
 							total_steps += data["steps"]
-						
 							temp_hash_table["walking"] = nested_temp_hash_table
 						end
 
 						if data["activity"] == "running"
 							nested_temp_hash_table = {}
-						
 							nested_temp_hash_table["duration"] = data["duration"]
 							total_duration += data["duration"]
-						
 							nested_temp_hash_table["distance"] = data["distance"]
 							total_distance += data["distance"]
-						
 							nested_temp_hash_table["steps"] = data["steps"]
 							total_steps += data["steps"]
-						
 							temp_hash_table["running"] = nested_temp_hash_table
 						end
 
-					temp_hash_table["total"] = {"total_duration" => total_duration, "total_distance" => total_distance, 
-						"total_steps" => total_steps}			
+						temp_hash_table["total"] = {"total_duration" => total_duration, 
+							"total_distance" => total_distance, "total_steps" => total_steps}			
 					end
 
 				end
@@ -126,9 +177,11 @@ class PatientsController < ApplicationController
 			return new_array
 		end
 
+		# Sets default dates.  Start date is beginning of month. End date is today.
 		@startdateymd = Date.today.year.to_s + Date.today.to_s.split('-')[1] + '01'
 		@enddateymd = Date.today.year.to_s + Date.today.to_s.split('-')[1] + Date.today.to_s.split('-')[2]
 
+		# Changes default dates to dates sent as parameters by user request 
 		if params[:startdateymd].present?
 			@startdateymd = strip_hyphens(params[:startdateymd])
       	end
@@ -136,61 +189,36 @@ class PatientsController < ApplicationController
 			@enddateymd = strip_hyphens(params[:enddateymd])
       	end
 
-      	if (Date.parse(@enddateymd) - Date.parse(@startdateymd)).to_i > 30
-			@startdateymd = Date.today.year.to_s + Date.today.to_s.split('-')[1] + '01'
-			@enddateymd = Date.today.year.to_s + Date.today.to_s.split('-')[1] + Date.today.to_s.split('-')[2]
-			@errors = "Error!  Date range cannot be more than 30 days."
-	  	end
-
-
+ 
 		uri = URI.parse("https://api.moves-app.com/api/1.1/user/summary/daily?from=" + @startdateymd + 
 			"&to=" + @enddateymd + "&access_token=" + @current_user.moves_access_token)
-		http = Net::HTTP.new(uri.host, uri.port)
-		http.use_ssl = true
-		request = Net::HTTP::Get.new(uri.request_uri)
-		response = http.request(request)
 
-		@body = response.body
-		@parsed_data = JSON.parse(@body)
-
-		if response.code != "200"
-			puts "Error! " + response.code
-			puts @parsed_data["error"] 
-
-			if response.code == '401'
-				puts "Access tokens expired." 
-#				renew_tokens(@current_user)
-			end
-
-			if response.code == '429' 
-				puts "Too many requests"
-			end
-
-			if response.code == '400'
-				puts "Invalid date range: max 31 of days allowed."
-			end
-
-		else
-			
-	      	@formatted_parsed_data = formatMovesParsedData(@parsed_data)
-
-		end
+		response = get_moves_json(uri)
 		
-		@startdateymd = add_hyphens(@startdateymd)
-	    @enddateymd = add_hyphens(@enddateymd)
+		if response.code == '200'
 
+			@body = response.body
+			@parsed_data = JSON.parse(@body)
+				
+		    @formatted_parsed_data = formatMovesParsedData(@parsed_data)
+
+			@startdateymd = add_hyphens(@startdateymd)
+		    @enddateymd = add_hyphens(@enddateymd)
+
+		elsif response.code == '429' 
+			@error = "Too many requests in a short period of time."
+		elsif response.code == '400'
+			@error = "Invalid date range: max 31 of days allowed and the requested range must be between user profiles first date and today."
+		elsif response.code == '401'
+			@error = "Access tokens expired and failed to renew tokens."
+		else 			
+			@error = "Unknown response from Moves server."
+		end				
 	end 
 
 	def fitbit_activity
 
-		def renew_tokens(current_user)
-			current_patient = Patient.find(current_user.id)
-			if current_patient != current_user.id 
-				puts "Failed to find patient"
-				return false
-			end
-			puts "Found user"
-			puts current_patient
+		def renew_fitbit_tokens
 
    			# Make a post request to the fitbit api endpoint for refresh tokens  
       		uri = URI.parse("https://api.fitbit.com/oauth2/token")
@@ -202,26 +230,27 @@ class PatientsController < ApplicationController
 	    	request = Net::HTTP::Post.new("https://api.fitbit.com/oauth2/token", 
 	    		initheader = {"Authorization" => "Basic MjI4MzNLOmM5NzFjZjhkMGRmMmU0NjllMTdlYzViODVlMTk4NTZj", 
 	    			"Content-Type" => "application/x-www-form-urlencoded"})
-	    	request.set_form_data({"grant_type" => "refresh_token", "refresh_token" => current_patient.fitbit_refresh_token})
+	    	request.set_form_data({"grant_type" => "refresh_token", "refresh_token" => @current_user.fitbit_refresh_token})
 
 	    	response = http.request(request)
 	    	if response.code == '200' 
 		    	body = response.body
 
 		      	# Renew the access_token and refresh_token in the database 	 
-				current_patient.fitbit_access_token = JSON.parse(body)["access_token"]
-				current_patient.fitbit_refresh_token = JSON.parse(body)["refresh_token"]
-				current_patient.save!
+				@current_user.fitbit_access_token = JSON.parse(body)["access_token"]
+				@current_user.fitbit_refresh_token = JSON.parse(body)["refresh_token"]
+				@current_user.save!
 			else 
 				puts "Failed at renewing tokens"
 				puts response.code
+				puts response.body
 				return false
 			end
 
 			return true
 		end
 
-		def get_json(uri)
+		def get_fitbit_json(uri)
 			http = Net::HTTP.new(uri.host, uri.port)
 			http.use_ssl = true
 			header_body = "Bearer " + @current_user.fitbit_access_token
@@ -234,22 +263,26 @@ class PatientsController < ApplicationController
 			if response.code != '200'
 				puts 'Bad status code'
 				puts response.code
+				puts response.body
+				puts @current_user.fitbit_access_token
+				puts @current_user.fitbit_refresh_token
+
 				# If response is 401, then try to renew the tokens and try again
 				if response.code == '401'
 					# Test if renew tokens has worked
-					if renew_tokens(@current_user)
+					if renew_fitbit_tokens
 						# Recursive call to getting a valid response again
-						get_json(uri)
+						get_fitbit_json(uri)
 					end
-
 				end
 			end
 
 			return response
 		end
 
-		@startdateymd = "2016-09-01"
-		@enddateymd = "2016-10-01"
+		# Sets default dates.  Start date is beginning of month. End date is today.
+		@startdateymd = Date.today.year.to_s + '-' + Date.today.to_s.split('-')[1] + '-' + '01'
+		@enddateymd = Date.today.to_s
 
 		if params[:startdateymd].present?
 			@startdateymd = params[:startdateymd]
@@ -259,51 +292,56 @@ class PatientsController < ApplicationController
       	end
 
 		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + "/profile.json")
-		response = get_json(uri)
+		response = get_fitbit_json(uri)
 
-		if response
+		if response.code == "200"
+
+			# Get user biometrics
 			@user_body = response.body
 			@parsed_user_data = JSON.parse(@user_body)
+			
+			# Get steps
+			uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
+				"/activities/steps/date/"+ @startdateymd + "/" + @enddateymd +".json")
+
+			response = get_fitbit_json(uri)
+
+			@step_body = response.body
+			@parsed_step_data = JSON.parse(@step_body)
+			
+			# Get distance 
+			uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
+				"/activities/distance/date/"+ @startdateymd + "/" + @enddateymd +".json")
+
+			response = get_fitbit_json(uri)
+
+			@distance_body = response.body
+			@parsed_distance_data = JSON.parse(@distance_body)
+
+			# Get calories
+			uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
+				"/activities/calories/date/"+ @startdateymd + "/" + @enddateymd +".json")
+
+			response = get_fitbit_json(uri)
+
+			@calories_body = response.body
+			@parsed_calories_data = JSON.parse(@calories_body)
+
+			# Get heart
+			uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
+				"/activities/heart/date/"+ @startdateymd + "/" + @enddateymd +".json")
+
+			response = get_fitbit_json(uri)
+
+			@heart_body = response.body
+			@parsed_heart_data = JSON.parse(@heart_body)
 		else 
-
+			if response.code == '401'
+				@error = "Access token expired"
+			elsif response.code == "400"
+				@error = "Refresh token invalid"
+			end
 		end
-		
-		# Get steps
-		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
-			"/activities/steps/date/"+ @startdateymd + "/" + @enddateymd +".json")
-
-		response = get_json(uri)
-
-		@step_body = response.body
-		@parsed_step_data = JSON.parse(@step_body)
-		
-		# Get distance 
-		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
-			"/activities/distance/date/"+ @startdateymd + "/" + @enddateymd +".json")
-
-		response = get_json(uri)
-
-		@distance_body = response.body
-		@parsed_distance_data = JSON.parse(@distance_body)
-
-		# Get calories
-		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
-			"/activities/calories/date/"+ @startdateymd + "/" + @enddateymd +".json")
-
-		response = get_json(uri)
-
-		@calories_body = response.body
-		@parsed_calories_data = JSON.parse(@calories_body)
-
-		# Get heart
-		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + 
-			"/activities/heart/date/"+ @startdateymd + "/" + @enddateymd +".json")
-
-		response = get_json(uri)
-
-		@heart_body = response.body
-		@parsed_heart_data = JSON.parse(@heart_body)
-
 	end
 
 	# Receives authorization code from Fitbit after user authorizes Activity Tracker
@@ -453,19 +491,6 @@ class PatientsController < ApplicationController
 		current_patient.fitbit_refresh_token = JSON.parse(body)["refresh_token"]
 		current_patient.fitbit_authorized = true
 		current_patient.save!
-	end
-
-
-	def read_attribute_for_validation(attr)
-		send(attr)
-	end
-
-	def self.human_attribute_name(attr, options = {})
-		attr
-	end
-
-	def self.lookup_ancestors
-		[self]
 	end
 
 end

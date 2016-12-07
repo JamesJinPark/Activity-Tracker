@@ -4,6 +4,16 @@
 
 	<%= form_tag fitbit_activity_path(@current_user), :method => :get do %>
 
+		<% if @error %>
+			<font color= "red">
+			  	<div id="error_explanation">
+					<ul>
+						<%= @error %>
+					</ul>
+				</div>
+			</font>
+		<% end %>
+
 	  <p> Please enter start and end dates for Fitbit Activity:
 	    <%= text_field_tag :startdateymd, params[:startdateymd], placeholder: "Start: YYYY-MM-DD" %>
 	    <%= text_field_tag :enddateymd, params[:enddateymd], placeholder: "End: YYYY-MM-DD" %>
@@ -24,133 +34,145 @@
 
 	</thead>
     <tbody>
-    	<tr>
-    		<td class="col-md-1">
-			  <span style="font-weight:normal">
-			    <%= @parsed_user_data["user"]["weight"].to_f * 2.20462%> lbs
-			  </span>
-			</td>
-    		<td class="col-md-1">
-			  <span style="font-weight:normal">
-			  	<%= ((@parsed_user_data["user"]["height"].to_f * 0.393701) / 12).to_s.split('.').first.to_i%> feet 
-			  	<%= (('0.' + (@parsed_user_data["user"]["height"].to_f * 0.393701 / 12).to_s.split('.').second).to_f * 12).to_i%> inches 
-			  </span>
-			</td>
-    		<td class="col-md-1">
-			  <span style="font-weight:normal">
-				<%= @parsed_user_data["user"]["age"]%> years old 
-			  </span>
-			</td>
-		</tr>
+		<% if @parsed_user_data != nil%>
+	    	<tr>
+	    		<td class="col-md-1">
+				  <span style="font-weight:normal">
+					<%= @parsed_user_data["user"]["weight"].to_f * 2.20462%> lbs
+				  </span>
+				</td>
+	    		<td class="col-md-1">
+				  <span style="font-weight:normal">
+				  	<%= ((@parsed_user_data["user"]["height"].to_f * 0.393701) / 12).to_s.split('.').first.to_i%> feet 
+				  	<%= (('0.' + (@parsed_user_data["user"]["height"].to_f * 0.393701 / 12).to_s.split('.').second).to_f * 12).to_i%> inches 
+				  </span>
+				</td>
+	    		<td class="col-md-1">
+				  <span style="font-weight:normal">
+					<%= @parsed_user_data["user"]["age"]%> years old 
+				  </span>
+				</td>
+			</tr>
+		<% end %>
     </tbody>
   </table>
   <br>
 
-<table id="activity_table" align="center">
-	<thead>
-	  <tr>
-	    <th scope="col">Date</th>
-	    <th scope="col">Steps</th>
-	    <th scope="col">Distance</th>
-	    <th scope="col">Calories</th>
-	  </tr>
-	</thead>
+	<table id="activity_table" align="center">
+		<thead>
+		  <tr>
+		    <th scope="col">Date</th>
+		    <th scope="col">Steps</th>
+		    <th scope="col">Distance</th>
+		    <th scope="col">Calories</th>
+		  </tr>
+		</thead>
+		
 	<tbody>
 	
 	<tr>
 	<td>
 
-	<table id="activity_table" align="center">
-	<thead>
-	</thead>
-	<tbody>
-	  <% @parsed_step_data["activities-steps"].each do |data| %>
-	    <tr>
-	      <td scope="row" class="spec"><%= data["dateTime"] %></td>
-	    </tr>
-	  <% end %>
-	</tbody>
-	</table>
-	</td>
+	<% if @parsed_step_data != nil%>
+		<table id="activity_table" align="center">
+		<thead>
+		</thead>
 
-	<td>
+		<tbody>
+		  <% @parsed_step_data["activities-steps"].each do |data| %>
+		    <tr>
+		      <td scope="row" class="spec"><%= data["dateTime"] %></td>
+		    </tr>
+		  <% end %>
+		</tbody>
+		</table>
+		</td>
 
-	<table id="activity_table" align="center">
-	<thead>
-	</thead>
+		<td>
 
-	<tbody>
-	  <% @parsed_step_data["activities-steps"].each do |data| %>
-	    <tr>
-	      <td class="col-md-1"><%= data["value"]%></td>
-	    </tr>
-	  <% end %>
-	</tbody>
-	</table>
+		<table id="activity_table" align="center">
+		<thead>
+		</thead>
 
-	</td>
+		<tbody>
+		  <% @parsed_step_data["activities-steps"].each do |data| %>
+		    <tr>
+		      <td class="col-md-1"><%= data["value"]%></td>
+		    </tr>
+		  <% end %>
+		</tbody>
+		</table>
 
-	<td>
-	
-	<table id="activity_table" align="center">
-	<thead>
-	</thead>
+		</td>
+	<% end %>
 
-	<tbody>
-	  <% @parsed_distance_data["activities-distance"].each do |data| %>
-	    <tr>
-	      <td class="col-md-1"><%= data["value"]%></td>
-	    </tr>
-	  <% end %>
-	</tbody>
-	</table>
+	<% if @parsed_distance_data != nil%>
+		<td>
+		
+		<table id="activity_table" align="center">
+		<thead>
+		</thead>
 
-	</td>
+		<tbody>
+		  <% @parsed_distance_data["activities-distance"].each do |data| %>
+		    <tr>
+		      <td class="col-md-1"><%= data["value"]%></td>
+		    </tr>
+		  <% end %>
+		</tbody>
+		</table>
 
-	<td>
+		</td>
+	<% end %>
 
-	<table id="activity_table" align="center">
-	<thead>
-	</thead>
+	<% if @parsed_calories_data != nil%>
+		<td>
+		<table id="activity_table" align="center">
+		<thead>
+		</thead>
 
-	<tbody>
-	  <% @parsed_calories_data["activities-calories"].each do |data| %>
-	    <tr>
-	      <td class="col-md-1"><%= data["value"]%></td>
-	    </tr>
-	  <% end %>
-	</tbody>
-	</table>
+		<tbody>
+		  <% @parsed_calories_data["activities-calories"].each do |data| %>
+		    <tr>
+		      <td class="col-md-1"><%= data["value"]%></td>
+		    </tr>
+		  <% end %>
+		</tbody>
+		</table>
 
-	</td>
+		</td>
+	<% end %>
 
 </tbody>
 </table>
 	
-<br><br>
-	<table id="activity_table" align="center">
-		<b>Heart rate</b><br>
-	<thead>
-	  <tr>
-	    <th scope="col">Date</th>
-	    <th scope="col">Heart rate</th>
-	  </tr>
-	</thead>
+<br>
+<br>
 
-	<tbody>
-	  <% @parsed_heart_data["activities-heart"].each do |data| %>
-	    <tr>
-	      <td scope="row" class="spec"><%= data["dateTime"] %></td>
-	      <td class="col-md-1" align="left">
-	      	<% data["value"]["heartRateZones"].each do |heart_rate| %>
-	      	  <%= heart_rate["name"] %>, max = <%= heart_rate["max"] %>, min = <%= heart_rate["min"] %><br>
-	      	<% end %>
-	      	<br>
-	      </td>
-	    </tr>
+		<table id="activity_table" align="center">
+			<b>Heart rate</b><br>
+		<thead>
+		  <tr>
+		    <th scope="col">Date</th>
+		    <th scope="col">Heart rate</th>
+		  </tr>
+		</thead>
+
+	<% if @parsed_heart_data != nil%>
+
+		<tbody>
+		  <% @parsed_heart_data["activities-heart"].each do |data| %>
+		    <tr>
+		      <td scope="row" class="spec"><%= data["dateTime"] %></td>
+		      <td class="col-md-1" align="left">
+		      	<% data["value"]["heartRateZones"].each do |heart_rate| %>
+		      	  <%= heart_rate["name"] %>, max = <%= heart_rate["max"] %>, min = <%= heart_rate["min"] %><br>
+		      	<% end %>
+		      	<br>
+		      </td>
+		    </tr>
+		  <% end %>
+		</tbody>
 	  <% end %>
-	</tbody>
-	</table>
-
-
+	 </table>
 </div>
