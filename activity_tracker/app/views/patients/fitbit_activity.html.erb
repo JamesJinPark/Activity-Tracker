@@ -1,7 +1,6 @@
 <div style="text-align: center">
 
 <h1><%= @current_user.name %>'s Fitbit Activity from <%= @startdateymd %> to <%= @enddateymd %>.</h1></br>
-
 	<%= form_tag fitbit_activity_path(@current_user), :method => :get do %>
 
 		<% if @error %>

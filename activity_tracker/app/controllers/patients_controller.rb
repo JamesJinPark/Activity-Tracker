@@ -42,14 +42,50 @@ class PatientsController < ApplicationController
 		
 		@startdateymd = Date.today.year.to_s + '-' + Date.today.to_s.split('-')[1] + '-' + '01'
 		@enddateymd = Date.today.to_s
+
 		if params[:startdateymd].present?
-			@startdateymd = params[:startdateymd]
+			start_date_string = params[:startdateymd]
+			start_year, start_months, start_days = start_date_string.split '-'
+
+			if	Date.valid_date? start_year.to_i, start_months.to_i, start_days.to_i
+				if start_days.length == 1
+					start_days = '0' + start_days 
+				end 
+				if start_months.length == 1
+					start_months = '0' + start_months
+				end 
+
+				@startdateymd = start_year + '-' + start_months + '-' + start_days
+			else 
+				@error = "Invalid start date"
+			end
+
+			if params[:enddateymd].present?
+				end_date_string = params[:enddateymd]
+				y, m, d = end_date_string.split '-'
+				if	Date.valid_date? y.to_i, m.to_i, d.to_i
+
+					if d.length == 1
+						d = '0' + d 
+					end 
+					if m.length == 1
+						m = '0' + m
+					end
+
+					@enddateymd = y + '-' + m + '-' + d
+				else 
+					@error = "Invalid end date"
+				end
+	      	end
+	    else
+			if params[:enddateymd].present?
+				@error = "No start date present"
+			end
       	end
-		if params[:enddateymd].present?
-			@enddateymd = params[:enddateymd]
-      	end
+      	puts @error
 
 		response = user.get_activities(:startdateymd => @startdateymd, :enddateymd => @enddateymd)
+
 		@unsorted_body = response["activities"]
 		@body = @unsorted_body.sort_by{ |e| e["date"] }
 
@@ -181,14 +217,47 @@ class PatientsController < ApplicationController
 		@startdateymd = Date.today.year.to_s + Date.today.to_s.split('-')[1] + '01'
 		@enddateymd = Date.today.year.to_s + Date.today.to_s.split('-')[1] + Date.today.to_s.split('-')[2]
 
+		# Checks dates to make sure they are valid. 
 		# Changes default dates to dates sent as parameters by user request 
 		if params[:startdateymd].present?
-			@startdateymd = strip_hyphens(params[:startdateymd])
-      	end
-		if params[:enddateymd].present?
-			@enddateymd = strip_hyphens(params[:enddateymd])
-      	end
+			start_date_string = params[:startdateymd]
+			start_year, start_months, start_days = start_date_string.split '-'
 
+			if	Date.valid_date? start_year.to_i, start_months.to_i, start_days.to_i
+				if start_days.length == 1
+					start_days = '0' + start_days 
+				end 
+				if start_months.length == 1
+					start_months = '0' + start_months
+				end 
+
+				@startdateymd = start_year + start_months + start_days
+			else 
+				@error = "Invalid start date"
+			end
+
+			if params[:enddateymd].present?
+				end_date_string = params[:enddateymd]
+				y, m, d = end_date_string.split '-'
+				if	Date.valid_date? y.to_i, m.to_i, d.to_i
+
+					if d.length == 1
+						d = '0' + d 
+					end 
+					if m.length == 1
+						m = '0' + m
+					end
+
+					@enddateymd = y + m + d
+				else 
+					@error = "Invalid end date"
+				end
+	      	end
+	    else
+			if params[:enddateymd].present?
+				@error = "No start date present"
+			end
+      	end
  
 		uri = URI.parse("https://api.moves-app.com/api/1.1/user/summary/daily?from=" + @startdateymd + 
 			"&to=" + @enddateymd + "&access_token=" + @current_user.moves_access_token)
@@ -285,11 +354,45 @@ class PatientsController < ApplicationController
 		@enddateymd = Date.today.to_s
 
 		if params[:startdateymd].present?
-			@startdateymd = params[:startdateymd]
+			start_date_string = params[:startdateymd]
+			start_year, start_months, start_days = start_date_string.split '-'
+
+			if	Date.valid_date? start_year.to_i, start_months.to_i, start_days.to_i
+				if start_days.length == 1
+					start_days = '0' + start_days 
+				end 
+				if start_months.length == 1
+					start_months = '0' + start_months
+				end 
+
+				@startdateymd = start_year + '-' + start_months + '-' + start_days
+			else 
+				@error = "Invalid start date"
+			end
+
+			if params[:enddateymd].present?
+				end_date_string = params[:enddateymd]
+				y, m, d = end_date_string.split '-'
+				if	Date.valid_date? y.to_i, m.to_i, d.to_i
+
+					if d.length == 1
+						d = '0' + d 
+					end 
+					if m.length == 1
+						m = '0' + m
+					end
+
+					@enddateymd = y + '-' + m + '-' + d
+				else 
+					@error = "Invalid end date"
+				end
+	      	end
+	    else
+			if params[:enddateymd].present?
+				@error = "No start date present"
+			end
       	end
-		if params[:enddateymd].present?
-			@enddateymd = params[:enddateymd]
-      	end
+
 
 		uri = URI.parse("https://api.fitbit.com/1/user/" + @current_user.fitbit_id + "/profile.json")
 		response = get_fitbit_json(uri)

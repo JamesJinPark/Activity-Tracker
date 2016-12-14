@@ -1,6 +1,17 @@
 <div style="text-align: center">
 <h1><%= @current_user.name %>'s Withings Activity from <%= @startdateymd %> to <%= @enddateymd %>.</h1></br>
 	<%= form_tag withings_activity_path(@current_user), :method => :get do %>
+
+		<% if @error %>
+			<font color= "red">
+			  	<div id="error_explanation">
+					<ul>
+						<%= @error %>
+					</ul>
+				</div>
+			</font>
+		<% end %>
+
 	  <p> Please enter start and end dates for Withings Activity:
 	    <%= text_field_tag :startdateymd, params[:startdateymd], placeholder: "Start: YYYY-MM-DD" %>
 	    <%= text_field_tag :enddateymd, params[:enddateymd], placeholder: "End: YYYY-MM-DD" %>
