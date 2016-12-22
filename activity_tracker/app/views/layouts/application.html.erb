@@ -1,17 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Activity Tracker</title>
+
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+
 </head>
-  <header class="header" align="center" margin="60">
-    <div class="header_bar row">
-      <h1 class="grid-12"><a href="/">Activity Tracker</a></h1>
+
+
+    <header id="header" class="header navbar-fixed-top">  
+        <div class="container">       
+                <span class="text">Activity Tracker</span>
+            <nav class="main-nav navbar-right" role="navigation">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button><!--//nav-toggle-->
+                </div><!--//navbar-header-->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active nav-item"><a href="/">Home</a></li>
+                          
+                          <%if patient_signed_in? %>                              
+                            <li class="active nav-item"><a href=<%= patient_path(current_patient)%>>Profile</a></li>
+
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Authorized Apps<i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+
+                                  <%if patient_signed_in? then %>                              
+                                    <% if current_patient.withings_authorized then %>
+                                      <%= link_to 'Withings', withings_activity_path(current_patient)%><br>
+                                    <% end %>
+                                    <% if current_patient.moves_authorized then %>
+                                      <%= link_to 'Moves', moves_activity_path(current_patient) %><br>
+                                    <% end %>
+                                    <% if current_patient.fitbit_authorized then %>
+                                      <%= link_to 'Fitbit', fitbit_activity_path(current_patient) %><br>
+                                    <% end %>
+                                  <% else%>
+                                    <li><a href="/">Please sign in first!</a></li>
+                                  <% end %>
+                                </ul> 
+                            </li><!--//dropdown-->                        
+
+                            <li class="active nav-item"><%= link_to 'Log out', destroy_patient_session_path, :method => :delete %></li>
+                          <% end %>
+                          
+                          <%if admin_signed_in? %>                              
+                            <li class="active nav-item"><a href=<%= admins_path(current_admin)%>>Dashboard</a></li>
+                            <li class="active nav-item"><%= link_to 'Log out', destroy_admin_session_path, :method => :delete %></li>
+                          <% end %>
+
+                    </ul><!--//nav-->
+                </div><!--//navabr-collapse-->
+            </nav><!--//main-nav-->                     
+        </div><!--//container-->
+    </header><!--//header-->
+</br>
+
+<!---
+  <header class="header" align="center">
+    <div class="container">
+      <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+          <a href="/">Activity Tracker</a>
+        </div>
+      </nav>
     </div>
   </header>  
+-->
+
   <body>
+    
 	  <% if flash[:notice] %>
     	<div class="notice" align="center" style="color:green"><%= flash[:notice] %></div>
   	  <% end %>
