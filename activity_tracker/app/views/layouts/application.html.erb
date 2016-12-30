@@ -36,19 +36,21 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Authorized Apps<i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
 
-                                  <%if patient_signed_in? then %>                              
-                                    <% if current_patient.withings_authorized then %>
-                                      <%= link_to 'Withings', withings_activity_path(current_patient)%><br>
+                                  <div align="center">
+                                    <%if patient_signed_in? then %>                              
+                                      <% if current_patient.withings_authorized then %>
+                                        <%= link_to 'Withings', withings_activity_path(current_patient)%><br>
+                                      <% end %>
+                                      <% if current_patient.moves_authorized then %>
+                                        <%= link_to 'Moves', moves_activity_path(current_patient) %><br>
+                                      <% end %>
+                                      <% if current_patient.fitbit_authorized then %>
+                                        <%= link_to 'Fitbit', fitbit_activity_path(current_patient) %><br>
+                                      <% end %>
+                                    <% else%>
+                                      <li><a href="/">Please sign in first!</a></li>
                                     <% end %>
-                                    <% if current_patient.moves_authorized then %>
-                                      <%= link_to 'Moves', moves_activity_path(current_patient) %><br>
-                                    <% end %>
-                                    <% if current_patient.fitbit_authorized then %>
-                                      <%= link_to 'Fitbit', fitbit_activity_path(current_patient) %><br>
-                                    <% end %>
-                                  <% else%>
-                                    <li><a href="/">Please sign in first!</a></li>
-                                  <% end %>
+                                  </div>
                                 </ul> 
                             </li><!--//dropdown-->                        
 
@@ -66,18 +68,6 @@
         </div><!--//container-->
     </header><!--//header-->
 </br>
-
-<!---
-  <header class="header" align="center">
-    <div class="container">
-      <nav class="navbar navbar-default navbar-static-top">
-        <div class="container-fluid">
-          <a href="/">Activity Tracker</a>
-        </div>
-      </nav>
-    </div>
-  </header>  
--->
 
   <body>
     

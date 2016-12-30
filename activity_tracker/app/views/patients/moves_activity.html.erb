@@ -12,6 +12,7 @@
 				</div>
 			</font>
 		<% end %>
+		<br>
 
 	  <p> Please enter start and end dates for Moves Activity:
 	    <%= text_field_tag :startdateymd, params[:startdateymd], placeholder: "Start: YYYY-MM-DD" %>
@@ -25,7 +26,7 @@
 	  	<%= button_to "Refresh tables", moves_activity_path, params:{:startdateymd => @startdateymd, :enddateymd => @enddateymd}, method: :get%>
 	  <br>
 
-	  <table id="activity_table" align="center">
+	  <table id="activity_table" align="center" width="1000px">
 	    <thead>
 	      <tr>
 	        <th scope="col">Date</th>
@@ -39,7 +40,7 @@
 	    <% if @formatted_parsed_data != nil %>
 	      <% @formatted_parsed_data.each do |data| %>
 	        <tr>
-	          <th scope="row" class="spec"><%= data["date"] %></th>
+	          <th scope="row" class="col-md-1"><%= data["date"] %></th>
 	          <td class="col-md-1" align="left">
 	            <% if not data["walking"].nil? %>
               	  <%= '%.2f' % (data["walking"]["distance"].to_f / 1000 * 0.621371) %> miles traveled

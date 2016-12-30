@@ -341,7 +341,7 @@ class PatientsController < ApplicationController
 					# Test if renew tokens has worked
 					if renew_fitbit_tokens
 						# Recursive call to getting a valid response again
-						get_fitbit_json(uri)
+						response = get_fitbit_json(uri)
 					end
 				end
 			end
@@ -443,6 +443,8 @@ class PatientsController < ApplicationController
 				@error = "Access token expired"
 			elsif response.code == "400"
 				@error = "Refresh token invalid"
+			elsif response.code == "429"
+				@error = "Too many requests.  Please wait one hour before trying again."
 			end
 		end
 	end

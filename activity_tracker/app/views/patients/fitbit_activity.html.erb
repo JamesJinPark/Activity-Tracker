@@ -12,6 +12,7 @@
 				</div>
 			</font>
 		<% end %>
+		<br>
 
 	  <p> Please enter start and end dates for Fitbit Activity:
 	    <%= text_field_tag :startdateymd, params[:startdateymd], placeholder: "Start: YYYY-MM-DD" %>
@@ -22,40 +23,6 @@
 	  <br>
 	  	<%= button_to "Refresh tables", fitbit_activity_path, params:{:startdateymd => @startdateymd, :enddateymd => @enddateymd}, method: :get%>
 	  <br>
-
-  <table id="activity_table" align="center">
-	<thead>
-		<tr>
-			<th scope="col">Weight</th>
-			<th scope="col">Height</th>
-			<th scope="col">Age</th>
-		</tr>
-
-	</thead>
-    <tbody>
-		<% if @parsed_user_data != nil%>
-	    	<tr>
-	    		<td class="col-md-1">
-				  <span style="font-weight:normal">
-					<%= @parsed_user_data["user"]["weight"].to_f * 2.20462%> lbs
-				  </span>
-				</td>
-	    		<td class="col-md-1">
-				  <span style="font-weight:normal">
-				  	<%= ((@parsed_user_data["user"]["height"].to_f * 0.393701) / 12).to_s.split('.').first.to_i%> feet 
-				  	<%= (('0.' + (@parsed_user_data["user"]["height"].to_f * 0.393701 / 12).to_s.split('.').second).to_f * 12).to_i%> inches 
-				  </span>
-				</td>
-	    		<td class="col-md-1">
-				  <span style="font-weight:normal">
-					<%= @parsed_user_data["user"]["age"]%> years old 
-				  </span>
-				</td>
-			</tr>
-		<% end %>
-    </tbody>
-  </table>
-  <br>
 
 	<table id="activity_table" align="center">
 		<thead>
@@ -148,8 +115,46 @@
 <br>
 <br>
 
-		<table id="activity_table" align="center">
-			<b>Heart rate</b><br>
+
+
+  <table id="activity_table" align="center">
+	<thead>
+		<tr>
+			<th scope="col">Weight</th>
+			<th scope="col">Height</th>
+			<th scope="col">Age</th>
+		</tr>
+
+	</thead>
+    <tbody>
+		<% if @parsed_user_data != nil%>
+	    	<tr>
+	    		<td class="col-md-1">
+				  <span style="font-weight:normal">
+					<%= @parsed_user_data["user"]["weight"].to_f * 2.20462%> lbs
+				  </span>
+				</td>
+	    		<td class="col-md-1">
+				  <span style="font-weight:normal">
+				  	<%= ((@parsed_user_data["user"]["height"].to_f * 0.393701) / 12).to_s.split('.').first.to_i%> feet 
+				  	<%= (('0.' + (@parsed_user_data["user"]["height"].to_f * 0.393701 / 12).to_s.split('.').second).to_f * 12).to_i%> inches 
+				  </span>
+				</td>
+	    		<td class="col-md-1">
+				  <span style="font-weight:normal">
+					<%= @parsed_user_data["user"]["age"]%> years old 
+				  </span>
+				</td>
+			</tr>
+		<% end %>
+    </tbody>
+  </table>
+
+<br>
+<br>
+
+	<table id="activity_table" align="center" width="1000px">
+		<b>Heart rate</b><br>
 		<thead>
 		  <tr>
 		    <th scope="col">Date</th>
@@ -162,8 +167,8 @@
 		<tbody>
 		  <% @parsed_heart_data["activities-heart"].each do |data| %>
 		    <tr>
-		      <td scope="row" class="spec"><%= data["dateTime"] %></td>
-		      <td class="col-md-1" align="left">
+				<td scope="row" class="col-md-1"><%= data["dateTime"] %></td>
+		      	<td class="col-md-1">
 		      	<% data["value"]["heartRateZones"].each do |heart_rate| %>
 		      	  <%= heart_rate["name"] %>, max = <%= heart_rate["max"] %>, min = <%= heart_rate["min"] %><br>
 		      	<% end %>
@@ -172,6 +177,8 @@
 		    </tr>
 		  <% end %>
 		</tbody>
-	  <% end %>
+
+	 <% end %>
 	 </table>
+
 </div>

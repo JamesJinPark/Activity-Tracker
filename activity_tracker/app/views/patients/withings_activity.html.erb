@@ -11,6 +11,7 @@
 				</div>
 			</font>
 		<% end %>
+		<br>
 
 	  <p> Please enter start and end dates for Withings Activity:
 	    <%= text_field_tag :startdateymd, params[:startdateymd], placeholder: "Start: YYYY-MM-DD" %>
@@ -60,12 +61,12 @@
 <br>
 <br>
 
-<table id="activity_table" align="center">
+<table id="activity_table" align="center" width="1200px">
 	<thead>
 		<tr>
-			<th scope="col">Weight</th>
-			<th scope="col">Height</th>
-			<th scope="col">Heart Rate</th>
+			<th scope="col" class="col-md-1">Weight</th>
+			<th scope="col" class="col-md-1">Height</th>
+			<th scope="col" class="col-md-1">Heart Rate</th>
 		</tr>
 
 	</thead>
@@ -75,32 +76,32 @@
 	    			  <table id="activity_table">
 					    <thead>
 					      <tr>
-					        <th scope="col">Date</th>
-					        <th scope="col">Weight</th>
+					        <th scope="col" class="col-md-1">Date</th>
+					        <th scope="col" class="col-md-3">Weight</th>
 					      </tr>
 					    </thead>
 					    <tbody>
 					      <% @weight.each do |data| %>
-					      <% date_parts = data.to_s.split(',').last.split("taken at: ").last.chomp(")]").split(/[\s.:]+/).map(&:to_i) %>
-					      <% date = DateTime.civil(date_parts[2], date_parts[1], date_parts[0], date_parts[3], date_parts[4], date_parts[5], 0).to_s(:db) %>
-					        <tr>
-					          <td scope="row" class="spec"><%= date %></td>
-					          <td class="col-md-1">
-					          <span style="font-weight:normal">
-					          	<%= (data.to_s.split(',').first.split(': ')[1].to_f * 2.20462).round(3) %> pounds
-							  </span>
-					          </td>
-					        </tr>
+						      <% date_parts = data.to_s.split(',').last.split("taken at: ").last.chomp(")]").split(/[\s.:]+/).map(&:to_i) %>
+						      <% date = DateTime.civil(date_parts[2], date_parts[1], date_parts[0], date_parts[3], date_parts[4], date_parts[5], 0).to_s(:db) %>
+						        <tr>
+						          <td scope="row" class="col-md-1"><%= date %></td>
+						          <td class="col-md-1">
+						          <span style="font-weight:normal">
+						          	<%= (data.to_s.split(',').first.split(': ')[1].to_f * 2.20462).round(3) %> lbs
+								  </span>
+						          </td>
+						        </tr>
 					      <% end %>
 					    </tbody>
 					  </table>
 				</th>
 	    		<th valign="top">
-	    		  <table id="activity_table">
+	    		  <table id="activity_table" align="center">
 				    <thead>
 				      <tr>
-				        <th scope="col">Date</th>
-				        <th scope="col">Height</th>
+				        <th scope="col" class="col-md-1">Date</th>
+				        <th scope="col" class="col-md-3">Height</th>
 				      </tr>
 				    </thead>
 
@@ -109,11 +110,11 @@
 				      <% date_parts = data.to_s.split(',').last.split("taken at: ").last.chomp(")]").split(/[\s.:]+/).map(&:to_i) %>
 				      <% date = DateTime.civil(date_parts[2], date_parts[1], date_parts[0], date_parts[3], date_parts[4], date_parts[5], 0).to_s(:db) %>
 				        <tr>
-				          <td scope="row" class="spec"><%= date%></td>
+				          <td scope="row" class="col-md-1"><%= date%></td>
 				          	<% raw_weight = (data.to_s.split(',').third.split(': ')[1].to_f * 3.28084).round(3) %>
 				          <td class="col-md-1">
 							<span style="font-weight:normal">
-				          	  <%= raw_weight.to_s.split(".")[0] %> feet <%= (("0." + raw_weight.to_s.split(".")[1].to_s).to_f * 12.0).round(1).to_i %> inches 
+				          	  <%= raw_weight.to_s.split(".")[0] %> ft <%= (("0." + raw_weight.to_s.split(".")[1].to_s).to_f * 12.0).round(1).to_i %> in 
 				          	</span>
 				          </td>
 				        </tr>
@@ -122,11 +123,11 @@
 				  </table>
 				 </th>
 	    		<th valign="top">
-	    		  <table id="activity_table">
+	    		  <table id="activity_table" align="center">
 				    <thead>
 				      <tr>
-				        <th scope="col">Date</th>
-				        <th scope="col">Heart Rate</th>
+				        <th scope="col" class="col-md-1">Date</th>
+				        <th scope="col" class="col-md-1">Heart Rate</th>
 				      </tr>
 				    </thead>
 
@@ -135,8 +136,8 @@
 				      <% date_parts = data.to_s.split(',').last.split("taken at: ").last.chomp(")]").split(/[\s.:]+/).map(&:to_i) %>
 				      <% date = DateTime.civil(date_parts[2], date_parts[1], date_parts[0], date_parts[3], date_parts[4], date_parts[5], 0).to_s(:db) %>
 				        <tr>
-				          <td scope="row" class="spec"><%= date %></td>
-				          <td class="col-md-1">
+				          <td scope="row" class="col-md-1"><%= date %></td>
+				          <td class="col-md-2">
 							<span style="font-weight:normal">
 				          	  <%= data.to_s.split(',')[5].split(': ')[1][/\d+/] %> bpm 
 	  			            </span>
