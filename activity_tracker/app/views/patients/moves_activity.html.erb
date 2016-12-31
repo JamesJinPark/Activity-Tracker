@@ -21,6 +21,7 @@
 	  </p>
 	<% end %> 
 
+	<% @formatted_parsed_data %> 
 
 	  <br>
 	  	<%= button_to "Refresh tables", moves_activity_path, params:{:startdateymd => @startdateymd, :enddateymd => @enddateymd}, method: :get%>

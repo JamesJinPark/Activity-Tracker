@@ -248,6 +248,7 @@ class PatientsController < ApplicationController
 
 		# Checks dates to make sure they are valid. 
 		# Changes default dates to dates sent as parameters by user request 
+		dates_are_valid = true
 		if params[:startdateymd].present?
 			start_date_string = params[:startdateymd]
 			start_year, start_months, start_days = start_date_string.split '-'
@@ -263,6 +264,7 @@ class PatientsController < ApplicationController
 				@startdateymd = start_year + start_months + start_days
 			else 
 				@error = "Invalid start date"
+				dates_are_valid = false
 			end
 
 			if params[:enddateymd].present?
@@ -280,38 +282,92 @@ class PatientsController < ApplicationController
 					@enddateymd = y + m + d
 				else 
 					@error = "Invalid end date"
+					dates_are_valid = false
 				end
 	      	end
 	    else
 			if params[:enddateymd].present?
 				@error = "No start date present"
+				dates_are_valid = false
 			end
       	end
- 
-		uri = URI.parse("https://api.moves-app.com/api/1.1/user/summary/daily?from=" + @startdateymd + 
-			"&to=" + @enddateymd + "&access_token=" + @current_user.moves_access_token)
 
-		response = get_moves_json(uri)
-		
-		if response.code == '200'
+      	if dates_are_valid then
 
-			@body = response.body
-			@parsed_data = JSON.parse(@body)
+	      	# Check to see if start date and end date is less than 3 months of data
+	      	# If more, then split the request into multiple requests
+	      	if (Date.parse(@enddateymd) - Date.parse(@startdateymd)).to_i <= 30 then 
+				uri = URI.parse("https://api.moves-app.com/api/1.1/user/summary/daily?from=" + @startdateymd + 
+					"&to=" + @enddateymd + "&access_token=" + @current_user.moves_access_token)
+
+				response = get_moves_json(uri)
 				
-		    @formatted_parsed_data = formatMovesParsedData(@parsed_data)
+				if response.code == '200'
+					@body = response.body
+					@parsed_data = JSON.parse(@body)	
+				    @formatted_parsed_data = formatMovesParsedData(@parsed_data)
+				end		
 
-			@startdateymd = add_hyphens(@startdateymd)
-		    @enddateymd = add_hyphens(@enddateymd)
+	      	else
 
-		elsif response.code == '429' 
-			@error = "Too many requests in a short period of time."
-		elsif response.code == '400'
-			@error = "Invalid date range: max 31 of days allowed and the requested range must be between user profiles first date and today."
-		elsif response.code == '401'
-			@error = "Access tokens expired and failed to renew tokens."
-		else 			
-			@error = "Unknown response from Moves server."
-		end				
+	      		tempStartDate = Date.parse(@startdateymd).to_s
+				tempEndDate = (Date.parse(@startdateymd) + 30).to_s
+
+				uri = URI.parse("https://api.moves-app.com/api/1.1/user/summary/daily?from=" + tempStartDate + 
+					"&to=" + tempEndDate + "&access_token=" + @current_user.moves_access_token)
+
+				response = get_moves_json(uri)
+				tempBody = ''
+
+				if response.code == '200'
+					@body = response.body
+					@parsed_data = JSON.parse(@body)
+					tempBody  = formatMovesParsedData(@parsed_data)
+								tempStartDate = (Date.parse(tempEndDate) + 1).to_s
+
+					# Create multiple requests to keep the requests under 31 days. 
+					while tempEndDate != @enddateymd
+
+						if (Date.parse(@enddateymd) - Date.parse(tempEndDate)).to_i <= 30 then 
+							tempEndDate = @enddateymd
+						else
+							tempEndDate = (Date.parse(tempEndDate) + 30).to_s
+						end
+
+						uri = URI.parse("https://api.moves-app.com/api/1.1/user/summary/daily?from=" + tempStartDate + 
+							"&to=" + tempEndDate + "&access_token=" + @current_user.moves_access_token)
+
+						response = get_moves_json(uri)
+						
+						if response.code == '200'
+							@body = response.body
+							@parsed_data = JSON.parse(@body)
+							tempBody  = tempBody + formatMovesParsedData(@parsed_data)
+						else 
+							break
+						end				
+						tempStartDate = (Date.parse(tempEndDate) + 1).to_s
+					end
+					@formatted_parsed_data = tempBody
+				end
+	      	end
+
+	      	if response.code == "200"
+				# No error message sent
+			elsif response.code == '429' 
+				@error = "Too many requests in a short period of time."
+			elsif response.code == '400'
+				@error = "Invalid date range: the requested range must be between user profiles first date and today."
+			elsif response.code == '401'
+				@error = "Access tokens expired and failed to renew tokens."
+			else 			
+				@error = "Unknown response from Moves server."
+			end
+		end
+ 
+		@startdateymd = add_hyphens(@startdateymd)
+		@enddateymd = add_hyphens(@enddateymd)
+
 	end 
 
 	def fitbit_activity
