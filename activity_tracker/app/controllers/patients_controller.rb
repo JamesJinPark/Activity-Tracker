@@ -84,10 +84,39 @@ class PatientsController < ApplicationController
       	end
       	puts @error
 
-		response = user.get_activities(:startdateymd => @startdateymd, :enddateymd => @enddateymd)
+      	# Check to see if start date and end date is less than 3 months of data
+      	# If more, then split the request into multiple requests
+      	if (Date.parse(@enddateymd) - Date.parse(@startdateymd)).to_i < 120 then 
+			response = user.get_activities(:startdateymd => @startdateymd, :enddateymd => @enddateymd)
+			@unsorted_body = response["activities"]
+			@body = @unsorted_body.sort_by{ |e| e["date"] }
+			puts response["activities"]
+      	else
 
-		@unsorted_body = response["activities"]
-		@body = @unsorted_body.sort_by{ |e| e["date"] }
+      		tempStartDate = Date.parse(@startdateymd).to_s
+			tempEndDate = (Date.parse(@startdateymd) + 120).to_s
+
+			response = user.get_activities(:startdateymd => tempStartDate, :enddateymd => tempEndDate)
+			tempBody = response["activities"]
+			tempStartDate = (Date.parse(tempEndDate) + 1).to_s
+
+			while tempEndDate != @enddateymd
+
+				if (Date.parse(@enddateymd) - Date.parse(tempEndDate)).to_i < 120 then 
+					tempEndDate = @enddateymd
+				else
+					tempEndDate = (Date.parse(tempEndDate) + 120).to_s
+				end
+
+				response = user.get_activities(:startdateymd => tempStartDate, :enddateymd => tempEndDate)
+				tempBody = tempBody + response["activities"]
+				tempStartDate = (Date.parse(tempEndDate) + 1).to_s
+
+			end
+
+			@body = tempBody.sort_by{ |e| e["date"] }
+
+      	end 
 
 		@weight = user.measurement_groups(measurement_type: 1)
 		@height = user.measurement_groups(measurement_type: 4)
